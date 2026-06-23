@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'eyebrow' => 'Sejak 2005 · Berastagi, Sumatera Utara',
+    'hero_title' => 'Tempat Farm Bertemu Meja Makan Anda',
+    'hero_subtitle' => 'Pengalaman bersantap farm-to-table sesungguhnya di ketinggian 1.400m — dari ladang dataran tinggi langsung ke piring Anda.',
+    'scene1_label' => 'Farm · Langkah 1 dari 5',
+    'scene1_title' => 'Semua berawal dari farm',
+    'scene1_body' => 'Sapi dataran tinggi merumput di ketinggian 1.400m. Udara sejuk. Tanah vulkanik.',
+    'scene1_link' => 'Kunjungi Farm',
+    'scene2_label' => 'Peternakan Susu · Langkah 2 dari 5',
+    'scene2_title' => 'Susu segar setiap pagi',
+    'scene2_body' => 'Sapi Holstein. Pemerahan harian. Dipasteurisasi di tempat. Tanpa bahan tambahan.',
+    'scene3_title' => 'Lima keju. Semua dibuat di sini.',
+    'scene4_label' => 'Dapur · Langkah 4 dari 5',
+    'scene4_title' => 'Dapur kami selalu terbuka.',
+    'scene4_body' => 'Saksikan setiap hidangan disiapkan. Oven kayu bakar. Bahan dari farm.',
+    'scene5_title' => 'Rasakan perbedaannya.',
+    'scene5_body' => 'Dari ladang dataran tinggi Berastagi hingga hidangan di depan Anda — setiap bahan punya cerita. Dengarkan ceritanya.',
+    'stats_years' => '20+ Tahun Bertani',
+    'stats_cheeses' => '5 Keju Artisan',
+    'stats_kitchen' => 'Dapur Terbuka',
+    'stats_est' => 'Sejak 2005',
+    'featured_menu' => 'Menu Unggulan',
+    'active_promos' => 'Promo Spesial',
+    'visit_sister' => 'Kunjungi juga Gundaling Farm',
+];

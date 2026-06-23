@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'title' => 'Reserve a Table',
+    'full_name' => 'Full Name',
+    'email' => 'Email',
+    'whatsapp_number' => 'WhatsApp Number',
+    'date' => 'Date',
+    'time' => 'Time',
+    'guests' => 'Number of Guests',
+    'occasion' => 'Occasion',
+    'notes' => 'Special Notes',
+    'is_group_event' => 'This is a large group or event (10+ guests)',
+    'group_name' => 'Group / Event Name',
+    'submit' => 'Reserve Now',
+    'occasion_birthday' => 'Birthday',
+    'occasion_anniversary' => 'Anniversary',
+    'occasion_business' => 'Business Dinner',
+    'occasion_wedding' => 'Wedding',
+    'occasion_large_group' => 'Large Group',
+    'occasion_other' => 'Other',
+    'hours_title' => 'Hours',
+    'hours_value' => 'Restaurant 10:00–20:00 (last order 19:00) daily',
+    'confirmation_title' => 'Reservation Received!',
+    'confirmation_body' => 'Our team will confirm your booking within 2 hours.',
+    'confirm_via_whatsapp' => 'Confirm via WhatsApp',
+];

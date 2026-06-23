@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'eyebrow' => 'Est. 2005 · Berastagi, North Sumatra',
+    'hero_title' => 'Where the Farm Meets Your Fork',
+    'hero_subtitle' => 'True farm-to-table dining at 1,400m elevation — from our highland fields straight to your plate.',
+    'scene1_label' => 'The Farm · Step 1 of 5',
+    'scene1_title' => 'It starts on the farm',
+    'scene1_body' => 'Highland cows grazing at 1,400m elevation. Cool air. Volcanic soil.',
+    'scene1_link' => 'Visit the Farm',
+    'scene2_label' => 'The Dairy · Step 2 of 5',
+    'scene2_title' => 'Fresh milk, every morning',
+    'scene2_body' => 'Holstein herd. Daily milking. Pasteurised on-site. No additives.',
+    'scene3_title' => 'Five cheeses. All made here.',
+    'scene4_label' => 'The Kitchen · Step 4 of 5',
+    'scene4_title' => 'Our kitchen is open. Always.',
+    'scene4_body' => 'Watch every dish being prepared. Wood-fire oven. Farm ingredients.',
+    'scene5_title' => 'Come taste the difference.',
+    'scene5_body' => 'From the highland fields of Berastagi to the dish in front of you — every ingredient has a story. Come hear it.',
+    'stats_years' => '20+ Years Farming',
+    'stats_cheeses' => '5 Artisan Cheeses',
+    'stats_kitchen' => 'Open Kitchen',
+    'stats_est' => 'Est. 2005',
+    'featured_menu' => 'Featured Menu',
+    'active_promos' => 'Special Offers',
+    'visit_sister' => 'Also visit Gundaling Farm',
+];

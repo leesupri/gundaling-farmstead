@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'title' => 'Reservasi Meja',
+    'full_name' => 'Nama Lengkap',
+    'email' => 'Email',
+    'whatsapp_number' => 'Nomor WhatsApp',
+    'date' => 'Tanggal',
+    'time' => 'Waktu',
+    'guests' => 'Jumlah Tamu',
+    'occasion' => 'Acara',
+    'notes' => 'Catatan Khusus',
+    'is_group_event' => 'Ini adalah grup besar atau acara (10+ tamu)',
+    'group_name' => 'Nama Grup / Acara',
+    'submit' => 'Reservasi Sekarang',
+    'occasion_birthday' => 'Ulang Tahun',
+    'occasion_anniversary' => 'Anniversary',
+    'occasion_business' => 'Makan Malam Bisnis',
+    'occasion_wedding' => 'Pernikahan',
+    'occasion_large_group' => 'Grup Besar',
+    'occasion_other' => 'Lainnya',
+    'hours_title' => 'Jam Operasional',
+    'hours_value' => 'Restoran 10:00–20:00 (pesanan terakhir 19:00) setiap hari',
+    'confirmation_title' => 'Reservasi Diterima!',
+    'confirmation_body' => 'Tim kami akan mengkonfirmasi reservasi Anda dalam 2 jam.',
+    'confirm_via_whatsapp' => 'Konfirmasi via WhatsApp',
+];
