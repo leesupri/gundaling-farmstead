@@ -47,7 +47,7 @@ class MenuItem extends Model
         return app()->getLocale() === 'id' ? $this->name_id : $this->name;
     }
 
-    public function localDescription(): string
+    public function localDescription(): ?string
     {
         return app()->getLocale() === 'id' ? $this->description_id : $this->description;
     }

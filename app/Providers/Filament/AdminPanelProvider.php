@@ -28,6 +28,10 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->brandName('Gundaling Farmstead')
+            ->brandLogo(asset('images/logos/Logo_GUNDALING_2-color_tall_on-white.png'))
+            ->brandLogoHeight('2.5rem')
+            ->favicon(asset('favicon-32x32.png'))
             ->colors([
                 'primary' => Color::Amber,
             ])

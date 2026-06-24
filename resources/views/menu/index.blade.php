@@ -52,7 +52,7 @@
                     <div class="menu-item-card relative bg-white rounded-xl overflow-hidden shadow-sm">
                         <div class="relative aspect-video">
                             @if ($item->image)
-                                <img src="/storage/{{ $item->image }}" alt="{{ $item->localName() }}" class="w-full h-full object-cover" loading="lazy">
+                                <img src="{{ str_starts_with($item->image, '/') ? $item->image : '/storage/' . $item->image }}" alt="{{ $item->localName() }}" class="w-full h-full object-cover" loading="lazy">
                             @else
                                 <div class="w-full h-full bg-linear-to-br from-farm-200 to-earth-200 flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-farm-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">

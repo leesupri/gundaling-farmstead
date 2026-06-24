@@ -25,7 +25,7 @@
 
             <div>
                 <h3 class="font-display text-lg text-farm-900 mb-2">{{ $isId ? 'Telepon' : 'Phone' }}</h3>
-                <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-5 py-2.5 rounded-full hover:opacity-90 transition-opacity duration-200 cursor-pointer">
+                <a href="https://wa.me/6282162599980" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-5 py-2.5 rounded-full hover:opacity-90 transition-opacity duration-200 cursor-pointer">
                     {{ __('common.chat_on_whatsapp') }}
                 </a>
             </div>

@@ -44,6 +44,7 @@ class MenuCategoryForm
                     ->default(null),
                 FileUpload::make('image')
                     ->image()
+                    ->disk('public')
                     ->directory('menu-categories'),
             ]);
     }

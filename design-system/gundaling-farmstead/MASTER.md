@@ -21,9 +21,9 @@ Farm site:  gundalingfarm.com (sister site, cross-linked)
 Company:    PT. Anugerah Alam Berastagi
 Address:    Jl. Jamin Ginting, Desa Jaranguda, Simpang Pelawi,
             Kabupaten Karo, Berastagi 22158, North Sumatra, Indonesia
-Phone:      +62 812-3456-7890
+Phone:      +62 821-6259-9980
 Email:      info@gundalingfarmstead.com
-WA:         https://wa.me/6281234567890
+WA:         https://wa.me/6282162599980
 Instagram:  @gundaling_farmstead
 Coords:     lat 3.1885, lng 98.5092
 Hours:      Restaurant 10:00–20:00 (last order 19:00) daily
@@ -407,7 +407,7 @@ On submit (POST /reservations):
 Confirmation page:
 - Success message with booking summary
 - WA Button: "Confirm via WhatsApp" →
-  href="https://wa.me/6281234567890?text=Hi+Gundaling+Farmstead%2C+I%27ve+just+made+a+reservation+online.+Name%3A+[name]%2C+Date%3A+[date]%2C+Time%3A+[time]%2C+Guests%3A+[guests]"
+  href="https://wa.me/6282162599980?text=Hi+Gundaling+Farmstead%2C+I%27ve+just+made+a+reservation+online.+Name%3A+[name]%2C+Date%3A+[date]%2C+Time%3A+[time]%2C+Guests%3A+[guests]"
 - Note: "Our team will confirm your booking within 2 hours."
 - Small /images/mascot/cow_mascot_apron.svg waving
 
@@ -520,7 +520,7 @@ HEAD:
     "addressLocality": "Berastagi", "addressRegion": "Sumatera Utara",
     "postalCode": "22158", "addressCountry": "ID" },
   "geo": { "@type": "GeoCoordinates", "latitude": 3.1885, "longitude": 98.5092 },
-  "telephone": "+6281234567890",
+  "telephone": "+6282162599980",
   "servesCuisine": ["Indonesian","Western","Karo","Farm to Table"],
   "openingHours": "Mo-Su 10:00-20:00"
 }
@@ -560,7 +560,7 @@ x-show="show" x-transition (spring scale entrance)
 - Fixed bottom-8 right-8, z-50
 - #25D366 bg, 56px circle
 - WhatsApp SVG icon (white)
-- href="https://wa.me/6281234567890?text=Halo+Gundaling+Farmstead%2C+..."
+- href="https://wa.me/6282162599980?text=Halo+Gundaling+Farmstead%2C+..."
 
 ===================================================================
 SEO PER PAGE

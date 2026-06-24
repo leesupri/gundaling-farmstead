@@ -34,3 +34,18 @@ Route::prefix('id')->name('id.')->group(function () {
 Route::middleware(['auth'])
     ->get('/secure/beo/{reservation}', [ReservationController::class, 'downloadBeo'])
     ->name('beo.download');
+
+
+// if (app()->environment('local')) {
+//     Route::get('/test-errors/{code}', function ($code) {
+//         return match((int)$code) {
+//             403  => abort(403),
+//             404  => abort(404),
+//             419  => abort(419),
+//             429  => abort(429),
+//             500  => abort(500),
+//             503  => abort(503),
+//             default => abort(404),
+//         };
+//     });
+// }

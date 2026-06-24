@@ -16,7 +16,7 @@
     </div>
 
     <a
-        href="https://wa.me/6281234567890?text={{ rawurlencode("Hi Gundaling Farmstead, I've just made a reservation online. Name: {$reservation->name}, Date: {$reservation->date->format('d M Y')}, Time: {$reservation->time}, Guests: {$reservation->guests}") }}"
+        href="https://wa.me/6282162599980?text={{ rawurlencode("Hi Gundaling Farmstead, I've just made a reservation online. Name: {$reservation->name}, Date: {$reservation->date->format('d M Y')}, Time: {$reservation->time}, Guests: {$reservation->guests}") }}"
         target="_blank" rel="noopener"
         class="inline-block bg-[#25D366] text-white font-bold px-8 py-3 rounded-full hover:opacity-90 transition-opacity duration-200 cursor-pointer"
     >

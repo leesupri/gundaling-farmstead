@@ -8,6 +8,21 @@ Alpine.start();
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+/** Registers inView only when at least one matching element exists, and guards against a missing entry.target. */
+function whenInView(selector, callback) {
+    const elements = typeof selector === 'string' ? document.querySelectorAll(selector) : [selector];
+    if (elements.length === 0) {
+        return;
+    }
+
+    inView(selector, (entry) => {
+        const target = entry?.target ?? entry;
+        if (target instanceof Element) {
+            callback(target);
+        }
+    });
+}
+
 if (!reducedMotion) {
     const heroBg = document.querySelector('.hero-bg');
     if (heroBg) {
@@ -16,7 +31,7 @@ if (!reducedMotion) {
         });
     }
 
-    inView('.scene', ({ target }) => {
+    whenInView('.scene', (target) => {
         const img = target.querySelector('.scene-img');
         const text = target.querySelector('.scene-text');
 
@@ -36,21 +51,21 @@ if (!reducedMotion) {
         }
     });
 
-    inView('.cheese-grid', ({ target }) => {
+    whenInView('.cheese-grid', (target) => {
         animate(target.querySelectorAll('.cheese-card'), { opacity: [0, 1], y: [40, 0] }, {
             duration: 0.6,
             delay: stagger(0.12),
         });
     });
 
-    inView('.menu-grid', ({ target }) => {
+    whenInView('.menu-grid', (target) => {
         animate(target.querySelectorAll('.menu-item-card'), { opacity: [0, 1], y: [20, 0] }, {
             duration: 0.5,
             delay: stagger(0.08),
         });
     });
 
-    inView('.promo-grid', ({ target }) => {
+    whenInView('.promo-grid', (target) => {
         animate(target.querySelectorAll('.promo-card'), { opacity: [0, 1], y: [30, 0] }, {
             duration: 0.5,
             delay: stagger(0.1),
@@ -68,7 +83,7 @@ if (!reducedMotion) {
 
     const timelineLine = document.querySelector('.timeline-connector');
     if (timelineLine) {
-        inView(timelineLine, ({ target }) => {
+        whenInView(timelineLine, (target) => {
             animate(target, { clipPath: ['inset(0 100% 0 0)', 'inset(0 0% 0 0)'] }, { duration: 1.2, easing: 'ease-out' });
         });
     }

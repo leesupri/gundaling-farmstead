@@ -9,7 +9,7 @@
     class="fixed bottom-8 right-8 z-50"
 >
     <a
-        href="https://wa.me/6281234567890?text={{ rawurlencode('Halo Gundaling Farmstead, saya ingin bertanya tentang...') }}"
+        href="https://wa.me/6282162599980?text={{ rawurlencode('Halo Gundaling Farmstead, saya ingin bertanya tentang...') }}"
         target="_blank"
         rel="noopener"
         aria-label="Chat on WhatsApp"

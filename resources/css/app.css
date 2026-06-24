@@ -37,6 +37,10 @@
 }
 
 @layer base {
+    [x-cloak] {
+        display: none !important;
+    }
+
     .walk-mascot {
         left: -80px;
     }

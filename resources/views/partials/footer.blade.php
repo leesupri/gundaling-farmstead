@@ -43,7 +43,7 @@
             <address class="text-farm-300 not-italic space-y-1">
                 <p>Jl. Jamin Ginting, Desa Jaranguda, Simpang Pelawi, Kabupaten Karo, Berastagi 22158, North Sumatra</p>
                 <p>{{ __('reservations.hours_value') }}</p>
-                <p><a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="hover:text-gold cursor-pointer">+62 812-3456-7890</a></p>
+                <p><a href="https://wa.me/6282162599980" target="_blank" rel="noopener" class="hover:text-gold cursor-pointer">+62 821-6259-9980</a></p>
                 <p><a href="mailto:info@gundalingfarmstead.com" class="hover:text-gold cursor-pointer">info@gundalingfarmstead.com</a></p>
             </address>
         </div>

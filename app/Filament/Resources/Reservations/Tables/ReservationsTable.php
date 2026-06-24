@@ -105,7 +105,7 @@ class ReservationsTable
                 Action::make('waLink')
                     ->label('WA Link')
                     ->icon('heroicon-o-chat-bubble-left-right')
-                    ->url(fn (Reservation $record) => 'https://wa.me/6281234567890?text=' . rawurlencode(
+                    ->url(fn (Reservation $record) => 'https://wa.me/6282162599980?text=' . rawurlencode(
                         "Hi {$record->name}, your reservation at Gundaling Farmstead on {$record->date->format('d M Y')} at {$record->time} for {$record->guests} guests is confirmed. We look forward to welcoming you!"
                     ))
                     ->openUrlInNewTab(),

@@ -27,6 +27,7 @@ class PromoForm
                     ->columnSpanFull(),
                 FileUpload::make('image')
                     ->image()
+                    ->disk('public')
                     ->directory('promos'),
                 TextInput::make('tag')
                     ->required(),

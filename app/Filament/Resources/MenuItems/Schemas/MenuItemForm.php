@@ -54,6 +54,7 @@ class MenuItemForm
                     ->columnSpanFull(),
                 FileUpload::make('image')
                     ->image()
+                    ->disk('public')
                     ->directory('menu-items'),
                 Toggle::make('is_available')
                     ->required()

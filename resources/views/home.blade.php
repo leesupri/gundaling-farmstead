@@ -12,7 +12,7 @@
     "addressLocality": "Berastagi", "addressRegion": "Sumatera Utara",
     "postalCode": "22158", "addressCountry": "ID" },
   "geo": { "@type": "GeoCoordinates", "latitude": 3.1885, "longitude": 98.5092 },
-  "telephone": "+6281234567890",
+  "telephone": "+6282162599980",
   "servesCuisine": ["Indonesian","Western","Karo","Farm to Table"],
   "openingHours": "Mo-Su 10:00-20:00"
 }
@@ -66,7 +66,7 @@
 <section class="scene py-24 px-6 lg:px-12 bg-earth-50">
     <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
         <div class="scene-img">
-            <img src="/images/hero/hero-farm.jpg" alt="Gundaling Farm highland fields" class="rounded-3xl aspect-video object-cover w-full" loading="lazy">
+            <img src="/images/restaurant/story.jpg" alt="Gundaling Farm highland fields" class="rounded-3xl aspect-video object-cover w-full" loading="lazy">
         </div>
         <div class="scene-text">
             <span class="text-amber font-sans font-bold tracking-wide">{{ __('home.scene1_label') }}</span>
@@ -125,7 +125,7 @@
 
 {{-- SCENE 4 — THE KITCHEN --}}
 <section class="scene relative py-32 px-6 lg:px-12 overflow-hidden">
-    <img src="/images/restaurant/story.jpg" alt="Gundaling Farmstead open kitchen" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+    <img src="/images/hero/hero-farm.jpg" alt="Gundaling Farmstead open kitchen" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
     <div class="absolute inset-0 bg-linear-to-l from-farm-950/80 via-farm-950/40 to-transparent"></div>
     <div class="relative max-w-6xl mx-auto flex justify-end">
         <div class="scene-text max-w-md text-right">
@@ -170,7 +170,7 @@
             @foreach ($featuredItems as $item)
                 <div class="menu-item-card bg-white rounded-xl overflow-hidden shadow-sm">
                     @if ($item->image)
-                        <img src="/storage/{{ $item->image }}" alt="{{ $item->localName() }}" class="aspect-video object-cover w-full" loading="lazy">
+                        <img src="{{ str_starts_with($item->image, '/') ? $item->image : '/storage/' . $item->image }}" alt="{{ $item->localName() }}" class="aspect-video object-cover w-full" loading="lazy">
                     @else
                         <div class="aspect-video bg-linear-to-br from-farm-200 to-earth-200"></div>
                     @endif

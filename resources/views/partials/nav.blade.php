@@ -2,6 +2,20 @@
     $locale = app()->getLocale();
     $prefix = $locale === 'id' ? 'id.' : '';
     $bare = fn (string $name) => str_replace('id.', '', $name);
+
+    $currentRoute = \Illuminate\Support\Facades\Route::current();
+    $currentParams = $currentRoute?->parameters() ?? [];
+
+    $resolveLocaleUrl = function (string $targetRouteName) use ($currentParams, $prefix, $bare) {
+        try {
+            return route($targetRouteName, $currentParams);
+        } catch (\Illuminate\Routing\Exceptions\UrlGenerationException) {
+            return route($targetRouteName === $bare($targetRouteName) ? 'home' : 'id.home');
+        }
+    };
+
+    $enUrl = $currentRoute ? $resolveLocaleUrl($bare($currentRoute->getName())) : route('home');
+    $idUrl = $currentRoute ? $resolveLocaleUrl('id.' . $bare($currentRoute->getName())) : route('id.home');
 @endphp
 
 <nav
@@ -27,9 +41,9 @@
             </a>
 
             <div class="flex items-center gap-2 text-sm">
-                <a href="{{ route($bare(\Illuminate\Support\Facades\Route::currentRouteName())) }}" class="cursor-pointer {{ $locale === 'en' ? 'text-gold font-bold' : 'text-white' }}">EN</a>
+                <a href="{{ $enUrl }}" class="cursor-pointer {{ $locale === 'en' ? 'text-gold font-bold' : 'text-white' }}">EN</a>
                 <span class="text-white/40">|</span>
-                <a href="{{ route('id.' . $bare(\Illuminate\Support\Facades\Route::currentRouteName())) }}" class="cursor-pointer {{ $locale === 'id' ? 'text-gold font-bold' : 'text-white' }}">ID</a>
+                <a href="{{ $idUrl }}" class="cursor-pointer {{ $locale === 'id' ? 'text-gold font-bold' : 'text-white' }}">ID</a>
             </div>
 
             <a href="{{ route($prefix . 'reservations') }}" class="bg-gold text-farm-950 font-bold px-5 py-2 rounded-full hover:bg-amber transition-colors duration-200 cursor-pointer">
