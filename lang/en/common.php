@@ -18,4 +18,6 @@ return [
     'footer_visit_farm' => 'Visit Gundaling Farm',
     'footer_looking_for_farm' => 'Looking for farm products or field trips?',
     'language' => 'Language',
+    'view_offer' => 'View Offer',
+    'maybe_later' => 'Maybe later',
 ];

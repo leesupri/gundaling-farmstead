@@ -18,4 +18,6 @@ return [
     'footer_visit_farm' => 'Kunjungi Gundaling Farm',
     'footer_looking_for_farm' => 'Mencari produk farm atau wisata edukasi?',
     'language' => 'Bahasa',
+    'view_offer' => 'Lihat Promo',
+    'maybe_later' => 'Nanti saja',
 ];

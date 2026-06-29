@@ -39,5 +39,7 @@
 
     @include('partials.scroll-top')
 
+    @include('partials.promo-popup')
+
 </body>
 </html>

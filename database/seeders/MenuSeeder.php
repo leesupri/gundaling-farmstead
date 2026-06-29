@@ -358,5 +358,60 @@ class MenuSeeder extends Seeder
                 }
             }
         }
+
+        $this->assignAdditionalPhotos();
+    }
+
+    /**
+     * Photo assignments confirmed against real menu photography. Entries with a
+     * 'category' key disambiguate item names that are reused across categories
+     * (e.g. "Cinnamon Coffee" exists in both Signature and Coffee Based).
+     */
+    private function assignAdditionalPhotos(): void
+    {
+        $assignments = [
+            ['name' => 'POTATOES CREAM SOUP', 'image' => '/images/menu/appetizers/Gundaling farmstead-152-Edit.png'],
+            ['name' => 'MUSHROOM CREAM SOUP', 'image' => '/images/menu/appetizers/Gundaling farmstead-155-Edit.png'],
+            ['name' => 'MIXED PLATTER', 'image' => '/images/menu/appetizers/Gundaling farmstead-mixed platter-004.png'],
+            ['name' => 'SINABUNG CHEESE - 250 GR', 'image' => '/images/menu/cheese/Gundaling farmstead new menu-278-Edit.png'],
+            ['name' => 'GUNDALING CHEESE - 250 GR', 'image' => '/images/menu/cheese/Gundaling farmstead new menu-285-Edit.png'],
+            ['name' => 'ANDALIMAN CHEESE - 250 GR', 'image' => '/images/menu/cheese/Gundaling farmstead new menu-293-Edit.png'],
+            ['name' => 'CHEESE CAKE', 'image' => '/images/menu/desserts/Gundaling farmstead-268.png'],
+            ['name' => 'MOO ROLL CAKE MARKISAH', 'image' => '/images/menu/desserts/Gundaling farmstead-285.png'],
+            ['name' => 'CREME BRULEE', 'image' => '/images/menu/desserts/Gundaling farmstead-307.png'],
+            ['name' => 'KLEPON CAKE', 'image' => '/images/menu/desserts/Gundaling farmstead-357.png'],
+            ['name' => 'ROSEMARY TEA', 'image' => '/images/menu/drinks/Gundaling farmstead new menu-190.png'],
+            ['name' => 'GINGER FRESH MILK', 'image' => '/images/menu/drinks/Gundaling farmstead new menu-206-Edit.png'],
+            ['name' => 'STRAWBERRY', 'category' => 'Smoothies', 'image' => '/images/menu/drinks/Gundaling farmstead-326.png'],
+            ['name' => 'SAPI PANGGANG KARO PASTA', 'image' => '/images/menu/pasta/Gundaling farmstead-067.png'],
+            ['name' => 'CREAMY TOMATO PASTA', 'image' => '/images/menu/pasta/Gundaling farmstead-075.png'],
+            ['name' => 'ARSIK SMOKED CHICKEN', 'image' => '/images/menu/pizza/Gundaling farmstead-117-Edit.png'],
+            ['name' => 'BEEF AND MUSHROOM', 'image' => '/images/menu/pizza/Gundaling farmstead-127-Edit.png'],
+            ['name' => 'FARMERS VEGETARIAN', 'image' => '/images/menu/pizza/Gundaling farmstead-128-Edit.png'],
+            ['name' => 'MARGHERITA', 'image' => '/images/menu/pizza/Gundaling farmstead-144-Edit.png'],
+            ['name' => 'GRILLED SMOKE PLATTER', 'image' => '/images/menu/western/Gundaling farmstead new menu-036.png'],
+            ['name' => 'GUNDALING CHEESE PLATTER', 'image' => '/images/promo/promo-cheese.jpg'],
+            ['name' => 'TASAK TELU', 'image' => '/images/menu/karo/Gundaling farmstead new menu-221-Edit.png'],
+            ['name' => 'BBQ BEEF RIBS', 'image' => '/images/menu/western/Gundaling farmstead new menu-238.png'],
+            ['name' => 'GUNDALING FARMSTEAD STEAK', 'image' => '/images/menu/western/Gundaling farmstead new menu-260-Edit.png'],
+            ['name' => 'IGA BAKAR KARO', 'image' => '/images/menu/karo/Gundaling farmstead new menu-265.png'],
+            ['name' => 'GUNDALING STEAK FRIED RICE', 'image' => '/images/menu/karo/Gundaling farmstead new menu-274.png'],
+            ['name' => 'SAPI PANGGANG KARO', 'category' => 'Taste of Karo', 'image' => '/images/menu/karo/Gundaling farmstead-101.png'],
+            ['name' => 'LAKSA KARO', 'image' => '/images/menu/karo/Gundaling farmstead new menu-019.png'],
+            ['name' => 'CINNAMON COFFEE', 'category' => 'Signature', 'image' => '/images/menu/drinks/DSC09160-Edit.png'],
+            ['name' => 'GIN TONIC', 'image' => '/images/menu/drinks/Gin tonic.png'],
+            ['name' => 'MYSTICAL BEET', 'image' => '/images/menu/drinks/Mystical beet.png'],
+            ['name' => 'SCREWDRIVER', 'image' => '/images/menu/drinks/Screwdriver.png'],
+            ['name' => 'SUMATERA ISLAND', 'image' => '/images/menu/drinks/Sumatra island.png'],
+        ];
+
+        foreach ($assignments as $assignment) {
+            MenuItem::where('name', $assignment['name'])
+                ->when(
+                    isset($assignment['category']),
+                    fn ($query) => $query->whereHas('category', fn ($q) => $q->where('name', $assignment['category']))
+                )
+                ->update(['image' => $assignment['image']]);
+        }
     }
 }

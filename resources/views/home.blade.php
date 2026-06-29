@@ -11,7 +11,7 @@
     "streetAddress": "Jl. Jamin Ginting, Desa Jaranguda",
     "addressLocality": "Berastagi", "addressRegion": "Sumatera Utara",
     "postalCode": "22158", "addressCountry": "ID" },
-  "geo": { "@type": "GeoCoordinates", "latitude": 3.1885, "longitude": 98.5092 },
+  "geo": { "@type": "GeoCoordinates", "latitude": 3.211194, "longitude": 98.508194 },
   "telephone": "+6282162599980",
   "servesCuisine": ["Indonesian","Western","Karo","Farm to Table"],
   "openingHours": "Mo-Su 10:00-20:00"
@@ -27,35 +27,39 @@
 
 {{-- SCENE 0 — HERO --}}
 <section id="hero" class="relative h-screen overflow-hidden">
-    <img src="/images/hero/hero-farm.jpg" alt="Aerial view of Gundaling Farmstead with Mt. Sinabung in the background" class="hero-bg absolute inset-0 w-full h-full object-cover" loading="eager">
-    <div class="absolute inset-0 bg-linear-to-b from-black/50 to-black/70"></div>
+    <div id="hero-skeleton" class="absolute inset-0 z-5 bg-farm-950 pointer-events-none transition-opacity duration-600">
+        <div class="shimmer-line absolute bottom-0 left-0 right-0 h-0.5"></div>
+    </div>
 
-    <img src="/images/mascot/cow_mascot_apron.svg" alt="" class="mascot-idle absolute right-8 lg:right-24 bottom-24 h-64 lg:h-96 hidden md:block" loading="lazy">
+    <img id="hero-img" src="/images/hero/Supriadi-golden-hour-17-07-22-5.jpg" alt="Gundaling Farmstead restaurant exterior at golden hour, red roof glowing above the garden pond" class="hero-bg absolute inset-0 w-full h-full object-cover" style="object-position: center 35%" loading="eager" fetchpriority="high">
+    <div class="absolute inset-0 bg-linear-to-br from-farm-950/75 via-farm-950/45 to-transparent"></div>
 
-    <div class="relative h-full flex items-center px-6 lg:px-12">
+    <img src="/images/mascot/cow_mascot_apron.svg" alt="" class="mascot-hero absolute right-8 lg:right-24 bottom-24 h-64 lg:h-96 hidden md:block" style="opacity:0;transform:translateX(60px) scale(0.85)" loading="lazy">
+
+    <div class="relative z-10 h-full flex items-center px-6 lg:px-12">
         <div class="max-w-xl">
-            <div class="flex items-center gap-2 text-farm-200 font-sans mb-4">
+            <div class="hero-eyebrow flex items-center gap-2 text-farm-200 font-sans mb-4">
                 <span class="w-2 h-2 rounded-full bg-gold animate-pulse"></span>
                 {{ __('home.eyebrow') }}
             </div>
-            <h1 class="font-display text-white text-4xl sm:text-5xl lg:text-6xl leading-tight mb-6">
+            <h1 class="hero-title font-display text-white text-4xl sm:text-5xl lg:text-6xl leading-tight mb-6">
                 {{ __('home.hero_title') }}
             </h1>
-            <p class="text-farm-100 text-lg mb-8 max-w-md">
+            <p class="hero-sub text-farm-100 text-lg mb-8 max-w-md">
                 {{ __('home.hero_subtitle') }}
             </p>
             <div class="flex flex-wrap gap-4">
-                <a href="{{ route($prefix . 'menu') }}" class="bg-farm-600 text-white px-6 py-3 rounded-full font-bold hover:bg-farm-500 transition-colors duration-200 cursor-pointer">
+                <a href="{{ route($prefix . 'menu') }}" class="hero-cta bg-farm-600 text-white px-6 py-3 rounded-full font-bold hover:bg-farm-500 transition-colors duration-200 cursor-pointer">
                     {{ __('common.view_menu') }} →
                 </a>
-                <a href="{{ route($prefix . 'reservations') }}" class="border-2 border-white text-white px-6 py-3 rounded-full font-bold hover:bg-white hover:text-farm-900 transition-colors duration-200 cursor-pointer">
+                <a href="{{ route($prefix . 'reservations') }}" class="hero-cta border-2 border-white text-white px-6 py-3 rounded-full font-bold hover:bg-white hover:text-farm-900 transition-colors duration-200 cursor-pointer">
                     {{ __('common.reserve_table') }}
                 </a>
             </div>
         </div>
     </div>
 
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white animate-bounce">
+    <div class="absolute z-10 bottom-8 left-1/2 -translate-x-1/2 text-white animate-bounce">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
         </svg>
@@ -66,7 +70,7 @@
 <section class="scene py-24 px-6 lg:px-12 bg-earth-50">
     <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
         <div class="scene-img">
-            <img src="/images/restaurant/story.jpg" alt="Gundaling Farm highland fields" class="rounded-3xl aspect-video object-cover w-full" loading="lazy">
+            <img src="/images/hero/supriadi-lee-pims-9_orig.jpg" alt="Gundaling Farm highland fields with Mt. Sinabung" class="rounded-3xl aspect-video object-cover w-full" loading="lazy">
         </div>
         <div class="scene-text">
             <span class="text-amber font-sans font-bold tracking-wide">{{ __('home.scene1_label') }}</span>
@@ -125,7 +129,7 @@
 
 {{-- SCENE 4 — THE KITCHEN --}}
 <section class="scene relative py-32 px-6 lg:px-12 overflow-hidden">
-    <img src="/images/hero/hero-farm.jpg" alt="Gundaling Farmstead open kitchen" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+    <img src="/images/hero/Supriadi-golden-hour-19-06-22-1.jpg" alt="Gundaling Farmstead at night, lit up with Mt. Sinabung silhouette behind" class="absolute inset-0 w-full h-full object-cover" style="object-position: center 40%" loading="lazy">
     <div class="absolute inset-0 bg-linear-to-l from-farm-950/80 via-farm-950/40 to-transparent"></div>
     <div class="relative max-w-6xl mx-auto flex justify-end">
         <div class="scene-text max-w-md text-right">
@@ -154,11 +158,17 @@
             {{ __('common.view_menu') }}
         </a>
     </div>
-    <div class="flex flex-wrap gap-8 justify-center text-earth-600 font-sans text-sm">
-        <span>{{ __('home.stats_years') }}</span>
-        <span>{{ __('home.stats_cheeses') }}</span>
-        <span>{{ __('home.stats_kitchen') }}</span>
-        <span>{{ __('home.stats_est') }}</span>
+    <div class="flex flex-wrap gap-10 justify-center items-baseline text-earth-600 font-sans text-sm">
+        <div class="text-center">
+            <div class="font-display text-3xl text-farm-700"><span class="stat-number" data-value="20">20</span>+</div>
+            <p>{{ __('home.stats_years_label') }}</p>
+        </div>
+        <div class="text-center">
+            <div class="font-display text-3xl text-farm-700"><span class="stat-number" data-value="5">5</span></div>
+            <p>{{ __('home.stats_cheeses_label') }}</p>
+        </div>
+        <span class="self-center">{{ __('home.stats_kitchen') }}</span>
+        <span class="self-center">{{ __('home.stats_est') }}</span>
     </div>
 </section>
 
@@ -168,12 +178,20 @@
         <h2 class="font-display text-3xl text-farm-900 mb-8 text-center">{{ __('home.featured_menu') }}</h2>
         <div class="menu-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             @foreach ($featuredItems as $item)
-                <div class="menu-item-card bg-white rounded-xl overflow-hidden shadow-sm">
-                    @if ($item->image)
-                        <img src="{{ str_starts_with($item->image, '/') ? $item->image : '/storage/' . $item->image }}" alt="{{ $item->localName() }}" class="aspect-video object-cover w-full" loading="lazy">
-                    @else
-                        <div class="aspect-video bg-linear-to-br from-farm-200 to-earth-200"></div>
-                    @endif
+                <div class="menu-item-card relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+                    <div class="relative aspect-video overflow-hidden">
+                        @if ($item->image)
+                            <img src="{{ str_starts_with($item->image, '/') ? $item->image : '/storage/' . $item->image }}" alt="{{ $item->localName() }}" class="w-full h-full object-cover" loading="lazy">
+                        @else
+                            <div class="w-full h-full bg-linear-to-br from-farm-200 to-earth-200"></div>
+                        @endif
+
+                        @if ($item->is_sold_out)
+                            <div class="absolute inset-0 bg-red-600/65 flex items-center justify-center">
+                                <span class="text-white font-bold tracking-widest uppercase text-sm">{{ __('common.sold_out') }}</span>
+                            </div>
+                        @endif
+                    </div>
                     <div class="p-4">
                         <h3 class="font-display text-farm-950">{{ $item->localName() }}</h3>
                         @if ($item->price)
@@ -194,6 +212,18 @@
     </p>
 </section>
 @endif
+
+{{-- BRIDGE TO FARM --}}
+<section class="scene relative py-32 px-6 lg:px-12 overflow-hidden">
+    <img src="/images/hero/DJI_0016-1.jpg" alt="Aerial view of Gundaling Farmstead and the farm valley" class="absolute inset-0 w-full h-full object-cover" style="object-position: center 60%" loading="lazy">
+    <div class="absolute inset-0 bg-linear-to-t from-farm-950/90 via-farm-950/40 to-transparent"></div>
+    <div class="scene-text relative max-w-2xl mx-auto text-center">
+        <h2 class="font-display text-3xl lg:text-4xl text-white mb-6">{{ __('home.bridge_title') }}</h2>
+        <a href="https://gundalingfarm.com" target="_blank" rel="noopener" class="inline-block bg-gold text-farm-950 px-8 py-3 rounded-full font-bold hover:bg-amber transition-colors duration-200 cursor-pointer">
+            {{ __('home.bridge_cta') }} →
+        </a>
+    </div>
+</section>
 
 <section class="py-16 px-6 lg:px-12 bg-earth-200 text-center">
     <a href="https://gundalingfarm.com" target="_blank" rel="noopener" class="text-farm-700 font-display text-xl hover:text-farm-500 cursor-pointer">

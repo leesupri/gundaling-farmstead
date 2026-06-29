@@ -7,9 +7,18 @@
     $isId = app()->getLocale() === 'id';
 @endphp
 
-<div class="pt-32 pb-20 px-6 lg:px-12 max-w-6xl mx-auto">
-    <h1 class="font-display text-4xl text-farm-900 text-center mb-12">{{ __('nav.contact') }}</h1>
+<section class="relative h-[40vh] overflow-hidden">
+    <img src="/images/hero/Resto.jpg" alt="Stone entrance path leading to Gundaling Farmstead" class="absolute inset-0 w-full h-full object-cover" style="object-position: center 70%" loading="eager">
+    <div class="absolute inset-0 bg-linear-to-b from-black/40 to-black/70"></div>
+    <div class="relative h-full flex items-center justify-center text-center px-6">
+        <div>
+            <h1 class="font-display text-white text-3xl lg:text-5xl mb-2">{{ $isId ? 'Kunjungi Kami' : 'Visit Us' }}</h1>
+            <p class="text-farm-100">{{ $isId ? 'Kami senang menyambut Anda' : "We'd love to welcome you" }}</p>
+        </div>
+    </div>
+</section>
 
+<div class="pt-16 pb-20 px-6 lg:px-12 max-w-6xl mx-auto">
     <div class="grid lg:grid-cols-2 gap-12">
         {{-- LEFT --}}
         <div class="space-y-6">
@@ -41,7 +50,7 @@
             </div>
 
             <iframe
-                src="https://www.openstreetmap.org/export/embed.html?bbox=98.504,3.184,98.514,3.193&layer=mapnik&marker=3.1885,98.5092"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=98.503194,3.206194,98.513194,3.216194&layer=mapnik&marker=3.211194,98.508194"
                 width="100%" height="280" class="rounded-xl border-0"
                 loading="lazy"
                 title="Gundaling Farmstead location"

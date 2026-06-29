@@ -8,7 +8,24 @@
 @endphp
 
 <div
-    x-data="{ active: '{{ $first?->slug }}', department: 'foods' }"
+    x-data="{
+        active: '{{ $first?->slug }}',
+        department: 'foods',
+        mounted: false,
+        init() {
+            this.$nextTick(() => { this.mounted = true });
+        },
+        scrollToSection(slug) {
+            this.active = slug;
+            gsap.to(window, { duration: 0.7, ease: 'power2.inOut', scrollTo: { y: '#' + slug, offsetY: 140 } });
+        },
+        animateSectionIn(el) {
+            if (!this.mounted || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                return;
+            }
+            gsap.fromTo(el, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' });
+        },
+    }"
     class="pt-32 pb-20 px-6 lg:px-12 max-w-6xl mx-auto"
 >
     <h1 class="font-display text-4xl text-farm-900 text-center mb-8">{{ __('menu.title') }}</h1>
@@ -32,7 +49,7 @@
             @foreach ($categories as $cat)
                 <a
                     href="#{{ $cat->slug }}"
-                    @click="active = '{{ $cat->slug }}'"
+                    @click.prevent="scrollToSection('{{ $cat->slug }}')"
                     x-show="department === '{{ $cat->department }}'"
                     :class="active === '{{ $cat->slug }}' ? 'bg-farm-600 text-white' : 'bg-white text-farm-700'"
                     class="px-4 py-2 rounded-full text-sm font-bold whitespace-nowrap transition-colors duration-200 cursor-pointer"
@@ -44,13 +61,18 @@
     </div>
 
     @foreach ($categories as $cat)
-        <section id="{{ $cat->slug }}" x-show="department === '{{ $cat->department }}'" class="mb-16">
+        <section
+            id="{{ $cat->slug }}"
+            x-show="department === '{{ $cat->department }}'"
+            x-effect="department === '{{ $cat->department }}' && animateSectionIn($el)"
+            class="mb-16"
+        >
             <h2 class="font-display text-2xl text-farm-600 mb-6">{{ $cat->localName() }}</h2>
 
             <div class="menu-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse ($cat->items as $item)
-                    <div class="menu-item-card relative bg-white rounded-xl overflow-hidden shadow-sm">
-                        <div class="relative aspect-video">
+                    <div class="menu-item-card relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+                        <div class="relative aspect-video overflow-hidden">
                             @if ($item->image)
                                 <img src="{{ str_starts_with($item->image, '/') ? $item->image : '/storage/' . $item->image }}" alt="{{ $item->localName() }}" class="w-full h-full object-cover" loading="lazy">
                             @else
@@ -68,7 +90,7 @@
                             @endif
 
                             @if ($item->is_sold_out)
-                                <div class="absolute inset-0 bg-red-500/60 flex items-center justify-center">
+                                <div class="absolute inset-0 bg-red-600/65 flex items-center justify-center">
                                     <span class="text-white font-bold tracking-widest uppercase text-sm">{{ __('common.sold_out') }}</span>
                                 </div>
                             @endif
@@ -76,7 +98,7 @@
 
                         <div class="p-4">
                             <h3 class="font-display text-farm-950">{{ $item->localName() }}</h3>
-                            <p class="text-earth-600 text-sm mt-1">{{ $item->localDescription() }}</p>
+                            <p class="text-earth-600 text-sm mt-1 line-clamp-2">{{ $item->localDescription() }}</p>
 
                             <div class="flex flex-wrap gap-3 mt-3">
                                 @forelse ($item->activePrices() as $label => $value)

@@ -63,8 +63,15 @@ class MenuItemForm
                     ->required(),
                 Toggle::make('is_sold_out')
                     ->required(),
-                TextInput::make('badge')
-                    ->helperText('e.g. New, Signature, Spicy')
+                Select::make('badge')
+                    ->options([
+                        'New' => 'New',
+                        'Signature' => 'Signature',
+                        'Spicy' => 'Spicy',
+                        "Chef's Pick" => "Chef's Pick",
+                        'Seasonal' => 'Seasonal',
+                    ])
+                    ->native(false)
                     ->default(null),
                 TextInput::make('sort_order')
                     ->required()

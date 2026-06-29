@@ -8,13 +8,25 @@ class Promo extends Model
 {
     protected $fillable = [
         'title', 'title_id', 'description', 'description_id', 'image',
-        'tag', 'tag_id', 'valid_until', 'is_active', 'sort_order',
+        'tag', 'tag_id', 'valid_until', 'is_active', 'show_as_popup', 'sort_order',
     ];
 
     protected $casts = [
         'valid_until' => 'date',
         'is_active' => 'boolean',
+        'show_as_popup' => 'boolean',
     ];
+
+    protected static function booted(): void
+    {
+        static::saving(function (Promo $promo) {
+            if ($promo->show_as_popup) {
+                static::query()
+                    ->when($promo->id, fn ($query) => $query->where('id', '!=', $promo->id))
+                    ->update(['show_as_popup' => false]);
+            }
+        });
+    }
 
     public function localTitle(): string
     {

@@ -7,7 +7,18 @@
     $rest = $promos->skip(1);
 @endphp
 
-<div x-data="{ lightbox: null }" @keydown.escape.window="lightbox = null" class="pt-32 pb-20 px-6 lg:px-12 max-w-6xl mx-auto">
+<section class="relative h-[40vh] overflow-hidden">
+    <img src="/images/hero/Resto.jpg" alt="Stone entrance path leading to Gundaling Farmstead" class="absolute inset-0 w-full h-full object-cover" loading="eager">
+    <div class="absolute inset-0 bg-linear-to-b from-black/40 to-black/70"></div>
+    <div class="relative h-full flex items-center justify-center text-center px-6">
+        <div>
+            <h1 class="font-display text-white text-3xl lg:text-5xl mb-2">{{ __('promo.title') }}</h1>
+            <p class="text-farm-100">{{ __('promo.subtitle') }}</p>
+        </div>
+    </div>
+</section>
+
+<div x-data="{ lightbox: null }" @keydown.escape.window="lightbox = null" class="pt-16 pb-20 px-6 lg:px-12 max-w-6xl mx-auto">
 
     @if ($featured)
         @php $featuredSrc = $featured->image ? '/storage/' . $featured->image : '/images/promo/promo-cheese.jpg'; @endphp

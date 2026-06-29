@@ -30,6 +30,8 @@ class PromosTable
                     ->date()
                     ->sortable(),
                 ToggleColumn::make('is_active'),
+                ToggleColumn::make('show_as_popup')
+                    ->label('Popup'),
                 TextColumn::make('sort_order')
                     ->numeric()
                     ->sortable(),

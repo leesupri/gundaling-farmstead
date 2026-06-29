@@ -3,14 +3,15 @@
 @section('content')
 
 <section class="relative h-[60vh] overflow-hidden">
-    <img src="/images/restaurant/story.jpg" alt="Gundaling Farmstead restaurant interior" class="absolute inset-0 w-full h-full object-cover" loading="eager">
+    <img src="/images/hero/DJI_0016-1.jpg" alt="Aerial view of Gundaling Farmstead, garden and mountains beyond" class="absolute inset-0 w-full h-full object-cover" style="object-position: center 60%" loading="eager" fetchpriority="high">
     <div class="absolute inset-0 bg-linear-to-b from-black/40 to-black/70"></div>
     <div class="relative h-full flex items-center justify-center">
         <h1 class="font-display text-white text-4xl lg:text-6xl">{{ app()->getLocale() === 'id' ? 'Kisah Kami' : 'Our Story' }}</h1>
     </div>
 </section>
 
-<section class="py-20 px-6 lg:px-12 max-w-4xl mx-auto">
+<section class="timeline relative py-20 px-6 lg:px-12 max-w-4xl mx-auto overflow-hidden">
+    <img src="/images/hero/resto-farm.png" alt="" class="absolute inset-0 w-full h-full object-cover opacity-15" loading="lazy">
     <div class="relative">
         <div class="timeline-connector absolute left-0 right-0 top-4 h-0.5 bg-farm-300 hidden lg:block"></div>
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
@@ -21,7 +22,7 @@
                 ['year' => 'Now', 'text' => 'Working farm + restaurant + agritourism destination.'],
             ] as $stop)
                 <div class="relative pl-6 lg:pl-0 lg:text-center">
-                    <span class="absolute lg:relative lg:block left-0 lg:mx-auto w-3 h-3 rounded-full bg-farm-600 top-2 lg:top-0 lg:mb-4"></span>
+                    <span class="timeline-dot absolute lg:relative lg:block left-0 lg:mx-auto w-3 h-3 rounded-full bg-farm-600 top-2 lg:top-0 lg:mb-4"></span>
                     <h3 class="font-display text-xl text-farm-600">{{ $stop['year'] }}</h3>
                     <p class="text-earth-700 text-sm mt-1">{{ $stop['text'] }}</p>
                 </div>
@@ -64,10 +65,15 @@
     </p>
 </section>
 
-<section class="py-12 px-6 lg:px-12 text-center">
-    <a href="https://gundalingfarm.com" target="_blank" rel="noopener" class="text-farm-600 font-display text-xl hover:text-farm-500 cursor-pointer">
-        Come visit the farm →
-    </a>
+<section class="scene relative py-32 px-6 lg:px-12 overflow-hidden">
+    <img src="/images/hero/supriadi-lee-pims-9_orig.jpg" alt="Gundaling Farm fields with Mt. Sinabung" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+    <div class="absolute inset-0 bg-linear-to-t from-farm-950/90 via-farm-950/40 to-transparent"></div>
+    <div class="scene-text relative max-w-2xl mx-auto text-center">
+        <h2 class="font-display text-3xl lg:text-4xl text-white mb-6">The farm is where it all begins.</h2>
+        <a href="https://gundalingfarm.com" target="_blank" rel="noopener" class="inline-block bg-gold text-farm-950 px-8 py-3 rounded-full font-bold hover:bg-amber transition-colors duration-200 cursor-pointer">
+            Visit Gundaling Farm →
+        </a>
+    </div>
 </section>
 
 @endsection

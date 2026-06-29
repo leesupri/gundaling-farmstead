@@ -16,8 +16,10 @@ class PromoForm
         return $schema
             ->components([
                 TextInput::make('title')
+                    ->label('Title (EN)')
                     ->required(),
                 TextInput::make('title_id')
+                    ->label('Title (ID)')
                     ->required(),
                 Textarea::make('description')
                     ->required()
@@ -37,6 +39,10 @@ class PromoForm
                 Toggle::make('is_active')
                     ->required()
                     ->default(true),
+                Toggle::make('show_as_popup')
+                    ->label('Show as popup on site entry')
+                    ->helperText('Shown once per visitor on first page load. Only one promo can be the active popup — enabling this turns it off for any other promo.')
+                    ->default(false),
                 TextInput::make('sort_order')
                     ->required()
                     ->numeric()

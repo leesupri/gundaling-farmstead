@@ -156,6 +156,11 @@ To save the design system for hierarchical retrieval across sessions, add `--per
 ```bash
 python3 skills/ui-ux-pro-max/scripts/search.py "<query>" --design-system --persist -p "Project Name"
 ```
+```bash
+python3 -y skills add emilkowalski/skill --skill emil-design-eng --agent claude-code
+python3 --yes impeccable@latest skills install
+python3 skills add https://github.com/Leonxlnx/taste-skill --skill "design-taste-frontend"
+```
 
 This creates:
 - `design-system/MASTER.md` — Global Source of Truth with all design rules
