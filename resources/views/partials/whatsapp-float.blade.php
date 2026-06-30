@@ -9,10 +9,10 @@
     class="fixed bottom-8 right-8 z-50"
 >
     <a
-        href="https://wa.me/6282162599980?text={{ rawurlencode('Halo Gundaling Farmstead, saya ingin bertanya tentang...') }}"
+        href="https://wa.me/6282162599980?text={{ rawurlencode(__('common.wa_prefill_message')) }}"
         target="_blank"
         rel="noopener"
-        aria-label="Chat on WhatsApp"
+        aria-label="{{ __('common.chat_on_whatsapp') }}"
         class="flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] shadow-lg hover:scale-105 transition-transform duration-200 cursor-pointer"
     >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-7 h-7 fill-white">

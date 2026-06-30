@@ -8,10 +8,10 @@
 @endphp
 
 <section class="relative h-[40vh] overflow-hidden">
-    <img src="/images/hero/Resto.jpg" alt="Stone entrance path leading to Gundaling Farmstead" class="absolute inset-0 w-full h-full object-cover" style="object-position: center 70%" loading="eager">
+    <img src="/images/hero/Resto.jpg" alt="Stone entrance path leading to Gundaling Farmstead" class="hero-bg absolute inset-0 w-full h-full object-cover" style="object-position: center 70%" loading="eager">
     <div class="absolute inset-0 bg-linear-to-b from-black/40 to-black/70"></div>
     <div class="relative h-full flex items-center justify-center text-center px-6">
-        <div>
+        <div class="hero-content-fade">
             <h1 class="font-display text-white text-3xl lg:text-5xl mb-2">{{ $isId ? 'Kunjungi Kami' : 'Visit Us' }}</h1>
             <p class="text-farm-100">{{ $isId ? 'Kami senang menyambut Anda' : "We'd love to welcome you" }}</p>
         </div>
@@ -41,7 +41,7 @@
 
             <div>
                 <h3 class="font-display text-lg text-farm-900 mb-2">Email</h3>
-                <a href="mailto:info@gundalingfarmstead.com" class="text-farm-600 hover:text-farm-500 cursor-pointer">info@gundalingfarmstead.com</a>
+                <a href="mailto:info@gundalingfarmstead.com" class="text-farm-600 hover:text-farm-500 cursor-pointer">info@pimsgundaling.com</a>
             </div>
 
             <div>

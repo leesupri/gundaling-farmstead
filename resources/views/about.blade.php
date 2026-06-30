@@ -3,10 +3,10 @@
 @section('content')
 
 <section class="relative h-[60vh] overflow-hidden">
-    <img src="/images/hero/DJI_0016-1.jpg" alt="Aerial view of Gundaling Farmstead, garden and mountains beyond" class="absolute inset-0 w-full h-full object-cover" style="object-position: center 60%" loading="eager" fetchpriority="high">
+    <img src="/images/hero/DJI_0016-1.jpg" alt="Aerial view of Gundaling Farmstead, garden and mountains beyond" class="hero-bg absolute inset-0 w-full h-full object-cover" style="object-position: center 60%" loading="eager" fetchpriority="high">
     <div class="absolute inset-0 bg-linear-to-b from-black/40 to-black/70"></div>
     <div class="relative h-full flex items-center justify-center">
-        <h1 class="font-display text-white text-4xl lg:text-6xl">{{ app()->getLocale() === 'id' ? 'Kisah Kami' : 'Our Story' }}</h1>
+        <h1 class="hero-content-fade font-display text-white text-4xl lg:text-6xl">{{ __('about.hero_title') }}</h1>
     </div>
 </section>
 
@@ -16,10 +16,10 @@
         <div class="timeline-connector absolute left-0 right-0 top-4 h-0.5 bg-farm-300 hidden lg:block"></div>
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
             @foreach ([
-                ['year' => '2005', 'text' => 'Farm established. "The cows planned it for us."'],
-                ['year' => '2018', 'text' => 'Cheese production begins. First Tomme aged.'],
-                ['year' => '2019', 'text' => 'Restaurant opens. Open kitchen, farm-to-table.'],
-                ['year' => 'Now', 'text' => 'Working farm + restaurant + agritourism destination.'],
+                ['year' => '2005', 'text' => __('about.timeline_2005')],
+                ['year' => '2018', 'text' => __('about.timeline_2018')],
+                ['year' => '2019', 'text' => __('about.timeline_2019')],
+                ['year' => __('about.timeline_now_label'), 'text' => __('about.timeline_now')],
             ] as $stop)
                 <div class="relative pl-6 lg:pl-0 lg:text-center">
                     <span class="timeline-dot absolute lg:relative lg:block left-0 lg:mx-auto w-3 h-3 rounded-full bg-farm-600 top-2 lg:top-0 lg:mb-4"></span>
@@ -33,25 +33,21 @@
 
 <section class="py-16 px-6 lg:px-12 max-w-3xl mx-auto space-y-12">
     <div>
-        <h2 class="font-display text-2xl text-farm-900 mb-3">A Journey That Started with Fertilizer</h2>
+        <h2 class="font-display text-2xl text-farm-900 mb-3">{{ __('about.story1_title') }}</h2>
         <p class="text-earth-700 leading-relaxed">
-            Andreas never set out to open a restaurant. What began as a small farming operation in the highlands of
-            Berastagi — cool air, volcanic soil, and a herd of dairy cows — slowly grew into something larger than
-            he imagined. The farm came first. Everything else followed from it.
+            {{ __('about.story1_body') }}
         </p>
     </div>
     <div>
-        <h2 class="font-display text-2xl text-farm-900 mb-3">From Milk to Cheese</h2>
+        <h2 class="font-display text-2xl text-farm-900 mb-3">{{ __('about.story2_title') }}</h2>
         <p class="text-earth-700 leading-relaxed">
-            Daily milking, on-site pasteurisation, and years of trial and error turned fresh milk into five artisan
-            cheeses — each aged and crafted by hand, true to the Karo highlands they come from.
+            {{ __('about.story2_body') }}
         </p>
     </div>
     <div>
-        <h2 class="font-display text-2xl text-farm-900 mb-3">Why Farm to Table Matters to Us</h2>
+        <h2 class="font-display text-2xl text-farm-900 mb-3">{{ __('about.story3_title') }}</h2>
         <p class="text-earth-700 leading-relaxed">
-            Every dish that leaves our open kitchen carries the story of the field it came from. We believe
-            ingredients taste better — and mean more — when you can trace them back to the soil.
+            {{ __('about.story3_body') }}
         </p>
     </div>
 </section>
@@ -61,7 +57,7 @@
         <path d="M7 7c-2.2 0-4 1.8-4 4v6h6v-6H6c0-1.1.9-2 2-2V7Zm11 0c-2.2 0-4 1.8-4 4v6h6v-6h-3c0-1.1.9-2 2-2V7Z"/>
     </svg>
     <p class="font-display italic text-2xl text-farm-700 max-w-2xl mx-auto">
-        "We did not plan to become a restaurant. The cows planned it for us."
+        "{{ __('about.quote') }}"
     </p>
 </section>
 
@@ -69,9 +65,9 @@
     <img src="/images/hero/supriadi-lee-pims-9_orig.jpg" alt="Gundaling Farm fields with Mt. Sinabung" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
     <div class="absolute inset-0 bg-linear-to-t from-farm-950/90 via-farm-950/40 to-transparent"></div>
     <div class="scene-text relative max-w-2xl mx-auto text-center">
-        <h2 class="font-display text-3xl lg:text-4xl text-white mb-6">The farm is where it all begins.</h2>
+        <h2 class="font-display text-3xl lg:text-4xl text-white mb-6">{{ __('about.bridge_title') }}</h2>
         <a href="https://gundalingfarm.com" target="_blank" rel="noopener" class="inline-block bg-gold text-farm-950 px-8 py-3 rounded-full font-bold hover:bg-amber transition-colors duration-200 cursor-pointer">
-            Visit Gundaling Farm →
+            {{ __('about.bridge_cta') }} →
         </a>
     </div>
 </section>

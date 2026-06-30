@@ -24,4 +24,5 @@ return [
     'confirmation_title' => 'Reservasi Diterima!',
     'confirmation_body' => 'Tim kami akan mengkonfirmasi reservasi Anda dalam 2 jam.',
     'confirm_via_whatsapp' => 'Konfirmasi via WhatsApp',
+    'wa_confirm_message' => 'Halo Gundaling Farmstead, saya baru saja membuat reservasi online. Nama: :name, Tanggal: :date, Waktu: :time, Jumlah Tamu: :guests',
 ];

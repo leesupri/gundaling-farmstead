@@ -24,4 +24,5 @@ return [
     'confirmation_title' => 'Reservation Received!',
     'confirmation_body' => 'Our team will confirm your booking within 2 hours.',
     'confirm_via_whatsapp' => 'Confirm via WhatsApp',
+    'wa_confirm_message' => "Hi Gundaling Farmstead, I've just made a reservation online. Name: :name, Date: :date, Time: :time, Guests: :guests",
 ];

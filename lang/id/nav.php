@@ -8,4 +8,5 @@ return [
     'contact' => 'Kontak',
     'reserve' => 'Reservasi Meja',
     'visit_farm' => 'Kunjungi Farm',
+    'toggle_menu' => 'Buka menu',
 ];

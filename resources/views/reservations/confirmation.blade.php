@@ -15,8 +15,16 @@
         <p><span class="font-bold text-farm-900">{{ __('reservations.guests') }}:</span> {{ $reservation->guests }}</p>
     </div>
 
+    @php
+        $waMessage = __('reservations.wa_confirm_message', [
+            'name' => $reservation->name,
+            'date' => $reservation->date->format('d M Y'),
+            'time' => $reservation->time,
+            'guests' => $reservation->guests,
+        ]);
+    @endphp
     <a
-        href="https://wa.me/6282162599980?text={{ rawurlencode("Hi Gundaling Farmstead, I've just made a reservation online. Name: {$reservation->name}, Date: {$reservation->date->format('d M Y')}, Time: {$reservation->time}, Guests: {$reservation->guests}") }}"
+        href="https://wa.me/6282162599980?text={{ rawurlencode($waMessage) }}"
         target="_blank" rel="noopener"
         class="inline-block bg-[#25D366] text-white font-bold px-8 py-3 rounded-full hover:opacity-90 transition-opacity duration-200 cursor-pointer"
     >

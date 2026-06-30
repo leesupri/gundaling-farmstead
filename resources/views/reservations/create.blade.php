@@ -7,10 +7,10 @@
 @endphp
 
 <section class="relative h-[40vh] overflow-hidden">
-    <img src="/images/hero/Supriadi-golden-hour-17-07-22-5.jpg" alt="Gundaling Farmstead restaurant exterior at golden hour" class="absolute inset-0 w-full h-full object-cover" style="object-position: center 35%" loading="eager">
+    <img src="/images/hero/Supriadi-golden-hour-17-07-22-5.jpg" alt="Gundaling Farmstead restaurant exterior at golden hour" class="hero-bg absolute inset-0 w-full h-full object-cover" style="object-position: center 35%" loading="eager">
     <div class="absolute inset-0 bg-linear-to-b from-black/40 to-black/70"></div>
     <div class="relative h-full flex items-center justify-center">
-        <h1 class="font-display text-white text-3xl lg:text-5xl">{{ __('reservations.title') }}</h1>
+        <h1 class="hero-content-fade font-display text-white text-3xl lg:text-5xl">{{ __('reservations.title') }}</h1>
     </div>
 </section>
 

@@ -28,4 +28,15 @@ return [
     'visit_sister' => 'Also visit Gundaling Farm',
     'bridge_title' => 'The farm is just minutes away.',
     'bridge_cta' => 'Visit Gundaling Farm',
+
+    'dairy_pills' => ['Fresh Milk', 'Yogurt', 'Gelato', 'Cheese'],
+    'cheeses' => [
+        ['name' => 'Mozzarella', 'age' => 'Fresh', 'note' => 'Soft, milky, mild'],
+        ['name' => 'Gundaling Cheese', 'age' => '2 Years', 'note' => 'Semi-hard, nutty'],
+        ['name' => 'Curd', 'age' => 'Fresh', 'note' => 'Light, tangy'],
+        ['name' => 'Sinabung Tomme', 'age' => '5-10 Months', 'note' => 'Earthy, firm'],
+        ['name' => 'Andaliman Tomme', 'age' => '3 Years', 'note' => 'Spiced, bold'],
+    ],
+    'kitchen_pills' => ['Wood-fire', 'Open Kitchen', 'Farm Ingredients'],
+    'testimonial_quote' => 'We did not plan to become a restaurant. The cows planned it for us.',
 ];

@@ -25,16 +25,33 @@ class MenuItem extends Model
         'is_sold_out' => 'boolean',
     ];
 
-    /** Price fields with a value, keyed by label (e.g. 'Hot' => 38000.00). */
+    /**
+     * Price fields with a value, keyed by localized label (e.g. 'Hot'/'Panas' => 38000.00).
+     * The 'Price' key is a stable sentinel (never displayed) marking a flat single price.
+     */
     public function activePrices(): array
     {
-        return array_filter([
+        $raw = array_filter([
             'Price' => $this->price,
             'Hot' => $this->hot_price,
             'Cold' => $this->cold_price,
             'Whole' => $this->whole_price,
             'Slice' => $this->slice_price,
         ], fn ($value) => $value !== null);
+
+        $labels = [
+            'Hot' => __('menu.price_hot'),
+            'Cold' => __('menu.price_cold'),
+            'Whole' => __('menu.price_whole'),
+            'Slice' => __('menu.price_slice'),
+        ];
+
+        $result = [];
+        foreach ($raw as $key => $value) {
+            $result[$key === 'Price' ? 'Price' : $labels[$key]] = $value;
+        }
+
+        return $result;
     }
 
     public function category(): BelongsTo

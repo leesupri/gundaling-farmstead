@@ -20,4 +20,5 @@ return [
     'language' => 'Language',
     'view_offer' => 'View Offer',
     'maybe_later' => 'Maybe later',
+    'wa_prefill_message' => "Hi Gundaling Farmstead, I'd like to ask about...",
 ];

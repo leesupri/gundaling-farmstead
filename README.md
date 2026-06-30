@@ -59,3 +59,26 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 
 Login for /admin is supri491@gmail.com / password
+
+# Clear caches
+php artisan optimize:clear
+php artisan config:clear
+php artisan route:clear
+php artisan view:clear
+php artisan cache:clear
+
+# Migrations
+php artisan migrate
+php artisan migrate:status
+
+# Run scheduler manually (for testing)
+php artisan schedule:run
+```
+
+
+
+Project number: 931240183789
+Project ID: gundaling-farmstead-gbp 
+
+
+931240183789-jtjebv5g7tp1h4ust7s62jcbt2r9aojh.apps.googleusercontent.com

@@ -8,10 +8,10 @@
 @endphp
 
 <section class="relative h-[40vh] overflow-hidden">
-    <img src="/images/hero/Resto.jpg" alt="Stone entrance path leading to Gundaling Farmstead" class="absolute inset-0 w-full h-full object-cover" loading="eager">
+    <img src="/images/hero/Resto.jpg" alt="Stone entrance path leading to Gundaling Farmstead" class="hero-bg absolute inset-0 w-full h-full object-cover" loading="eager">
     <div class="absolute inset-0 bg-linear-to-b from-black/40 to-black/70"></div>
     <div class="relative h-full flex items-center justify-center text-center px-6">
-        <div>
+        <div class="hero-content-fade">
             <h1 class="font-display text-white text-3xl lg:text-5xl mb-2">{{ __('promo.title') }}</h1>
             <p class="text-farm-100">{{ __('promo.subtitle') }}</p>
         </div>
@@ -37,7 +37,7 @@
                 <h2 class="font-display text-2xl text-farm-900 mb-2">{{ $featured->localTitle() }}</h2>
                 <p class="text-earth-700">{{ $featured->localDescription() }}</p>
                 @if ($featured->valid_until)
-                    <p class="text-earth-500 text-sm mt-3">Valid until {{ $featured->valid_until->format('d M Y') }}</p>
+                    <p class="text-earth-500 text-sm mt-3">{{ __('promo.valid_until', ['date' => $featured->valid_until->format('d M Y')]) }}</p>
                 @endif
             </div>
         </div>
@@ -61,7 +61,7 @@
                     <h3 class="font-display text-farm-900">{{ $promo->localTitle() }}</h3>
                     <p class="text-earth-600 text-sm mt-1">{{ $promo->localDescription() }}</p>
                     @if ($promo->valid_until)
-                        <p class="text-earth-500 text-xs mt-3">Valid until {{ $promo->valid_until->format('d M Y') }}</p>
+                        <p class="text-earth-500 text-xs mt-3">{{ __('promo.valid_until', ['date' => $promo->valid_until->format('d M Y')]) }}</p>
                     @endif
                 </div>
             </div>

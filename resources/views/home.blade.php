@@ -66,8 +66,30 @@
     </div>
 </section>
 
+{{-- Companion mascot: rides a curved path down the whole homepage as you scroll, fades out before the footer --}}
+<div class="mascot-path-track hidden md:block fixed top-0 left-0 z-40 pointer-events-none" style="opacity:0">
+    <img src="/images/mascot/cow_mascot_vector.svg" alt="" class="h-20 lg:h-28" loading="lazy">
+</div>
+
+{{-- Scroll progress bar --}}
+<div class="fixed top-0 left-0 w-full h-1 z-50 pointer-events-none">
+    <div class="scroll-progress-bar h-full bg-gold origin-left" style="transform: scaleX(0)"></div>
+</div>
+
+{{-- Scene step rail: jump to any of the 5 story steps, active dot tracks scroll position --}}
+<div class="scene-rail hidden lg:flex fixed right-6 top-1/2 -translate-y-1/2 z-40 flex-col gap-4" aria-label="Story progress">
+    @foreach (range(1, 5) as $step)
+        <button
+            type="button"
+            aria-label="Go to step {{ $step }} of 5"
+            class="scene-rail-dot w-2.5 h-2.5 rounded-full bg-farm-300/50 hover:bg-farm-400 transition-colors duration-300 cursor-pointer"
+            data-step-target="{{ $step }}"
+        ></button>
+    @endforeach
+</div>
+
 {{-- SCENE 1 — THE FARM --}}
-<section class="scene py-24 px-6 lg:px-12 bg-earth-50">
+<section data-step="1" class="scene py-24 px-6 lg:px-12 bg-earth-50">
     <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
         <div class="scene-img">
             <img src="/images/hero/supriadi-lee-pims-9_orig.jpg" alt="Gundaling Farm highland fields with Mt. Sinabung" class="rounded-3xl aspect-video object-cover w-full" loading="lazy">
@@ -84,14 +106,14 @@
 </section>
 
 {{-- SCENE 2 — THE DAIRY --}}
-<section class="scene py-24 px-6 lg:px-12 bg-farm-50">
+<section data-step="2" class="scene py-24 px-6 lg:px-12 bg-farm-50">
     <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
         <div class="scene-text order-2 lg:order-1">
             <span class="text-amber font-sans font-bold tracking-wide">{{ __('home.scene2_label') }}</span>
             <h2 class="font-display text-3xl lg:text-4xl text-farm-900 mt-2 mb-4">{{ __('home.scene2_title') }}</h2>
             <p class="text-earth-700 text-lg mb-6">{{ __('home.scene2_body') }}</p>
             <div class="flex flex-wrap gap-2">
-                @foreach (['Fresh Milk', 'Yogurt', 'Gelato', 'Cheese'] as $pill)
+                @foreach (__('home.dairy_pills') as $pill)
                     <a href="https://gundalingfarm.com" target="_blank" rel="noopener" class="bg-white border border-farm-300 text-farm-700 px-4 py-2 rounded-full text-sm hover:bg-farm-100 cursor-pointer">
                         {{ $pill }}
                     </a>
@@ -104,19 +126,13 @@
     </div>
 </section>
 
-{{-- SCENE 3 — THE CHEESE CELLAR --}}
-<section class="scene py-24 px-6 lg:px-12 bg-farm-950 relative overflow-hidden">
+{{-- SCENE 3 — THE CHEESE CELLAR (pins while cards reveal one-by-one) --}}
+<section data-step="3" class="cheese-pin-section scene py-24 px-6 lg:px-12 bg-farm-950 relative overflow-hidden min-h-screen flex items-center">
     <img src="/images/promo/promo-cheese.jpg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-20" loading="lazy">
     <div class="relative max-w-6xl mx-auto text-center">
         <h2 class="font-display text-3xl lg:text-4xl text-white mb-12">{{ __('home.scene3_title') }}</h2>
         <div class="cheese-grid grid grid-cols-2 lg:grid-cols-5 gap-4 overflow-x-auto">
-            @foreach ([
-                ['name' => 'Mozzarella', 'age' => 'Fresh', 'note' => 'Soft, milky, mild'],
-                ['name' => 'Gundaling Cheese', 'age' => '2 Years', 'note' => 'Semi-hard, nutty'],
-                ['name' => 'Curd', 'age' => 'Fresh', 'note' => 'Light, tangy'],
-                ['name' => 'Sinabung Tomme', 'age' => '5-10 Months', 'note' => 'Earthy, firm'],
-                ['name' => 'Andaliman Tomme', 'age' => '3 Years', 'note' => 'Spiced, bold'],
-            ] as $cheese)
+            @foreach (__('home.cheeses') as $cheese)
                 <div class="cheese-card bg-farm-900/80 rounded-2xl p-5 text-left">
                     <h3 class="font-display text-white text-lg mb-1">{{ $cheese['name'] }}</h3>
                     <p class="text-farm-300 text-xs mb-2">{{ $cheese['age'] }}</p>
@@ -128,7 +144,7 @@
 </section>
 
 {{-- SCENE 4 — THE KITCHEN --}}
-<section class="scene relative py-32 px-6 lg:px-12 overflow-hidden">
+<section data-step="4" class="scene relative py-32 px-6 lg:px-12 overflow-hidden">
     <img src="/images/hero/Supriadi-golden-hour-19-06-22-1.jpg" alt="Gundaling Farmstead at night, lit up with Mt. Sinabung silhouette behind" class="absolute inset-0 w-full h-full object-cover" style="object-position: center 40%" loading="lazy">
     <div class="absolute inset-0 bg-linear-to-l from-farm-950/80 via-farm-950/40 to-transparent"></div>
     <div class="relative max-w-6xl mx-auto flex justify-end">
@@ -137,16 +153,16 @@
             <h2 class="font-display text-3xl lg:text-4xl text-white mt-2 mb-4">{{ __('home.scene4_title') }}</h2>
             <p class="text-farm-100 text-lg mb-6">{{ __('home.scene4_body') }}</p>
             <div class="flex flex-wrap gap-2 justify-end">
-                <span class="bg-white/10 text-white px-4 py-2 rounded-full text-sm">Wood-fire</span>
-                <span class="bg-white/10 text-white px-4 py-2 rounded-full text-sm">Open Kitchen</span>
-                <span class="bg-white/10 text-white px-4 py-2 rounded-full text-sm">Farm Ingredients</span>
+                @foreach (__('home.kitchen_pills') as $pill)
+                    <span class="bg-white/10 text-white px-4 py-2 rounded-full text-sm">{{ $pill }}</span>
+                @endforeach
             </div>
         </div>
     </div>
 </section>
 
 {{-- SCENE 5 — TO YOUR TABLE --}}
-<section class="scene py-24 px-6 lg:px-12 bg-earth-200 text-center">
+<section data-step="5" class="scene py-24 px-6 lg:px-12 bg-earth-200 text-center">
     <img src="/images/mascot/cow_mascot_apron.svg" alt="" class="mascot-idle h-48 mx-auto mb-6" loading="lazy">
     <h2 class="font-display text-3xl lg:text-5xl text-farm-600 mb-4">{{ __('home.scene5_title') }}</h2>
     <p class="text-earth-700 text-lg max-w-2xl mx-auto mb-8">{{ __('home.scene5_body') }}</p>
@@ -208,7 +224,7 @@
 @if ($activePromos->isNotEmpty())
 <section class="py-20 px-6 lg:px-12 bg-farm-600 text-center">
     <p class="font-display italic text-white text-2xl lg:text-3xl max-w-3xl mx-auto">
-        “We did not plan to become a restaurant. The cows planned it for us.”
+        “{{ __('home.testimonial_quote') }}”
     </p>
 </section>
 @endif

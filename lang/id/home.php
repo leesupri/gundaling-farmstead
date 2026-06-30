@@ -28,4 +28,15 @@ return [
     'visit_sister' => 'Kunjungi juga Gundaling Farm',
     'bridge_title' => 'Farm hanya beberapa menit dari sini.',
     'bridge_cta' => 'Kunjungi Gundaling Farm',
+
+    'dairy_pills' => ['Susu Segar', 'Yogurt', 'Gelato', 'Keju'],
+    'cheeses' => [
+        ['name' => 'Mozzarella', 'age' => 'Segar', 'note' => 'Lembut, creamy, ringan'],
+        ['name' => 'Gundaling Cheese', 'age' => '2 Tahun', 'note' => 'Semi-keras, gurih kacang'],
+        ['name' => 'Curd', 'age' => 'Segar', 'note' => 'Ringan, segar asam'],
+        ['name' => 'Sinabung Tomme', 'age' => '5-10 Bulan', 'note' => 'Earthy, padat'],
+        ['name' => 'Andaliman Tomme', 'age' => '3 Tahun', 'note' => 'Berempah, kuat'],
+    ],
+    'kitchen_pills' => ['Oven Kayu Bakar', 'Dapur Terbuka', 'Bahan dari Farm'],
+    'testimonial_quote' => 'Kami tidak berencana menjadi restoran. Sapi-sapi yang merencanakannya untuk kami.',
 ];
