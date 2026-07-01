@@ -241,10 +241,10 @@
     </div>
 </section>
 
-<section class="py-16 px-6 lg:px-12 bg-earth-200 text-center">
+<!-- <section class="py-16 px-6 lg:px-12 bg-earth-200 text-center">
     <a href="https://gundalingfarm.com" target="_blank" rel="noopener" class="text-farm-700 font-display text-xl hover:text-farm-500 cursor-pointer">
         {{ __('home.visit_sister') }} →
     </a>
-</section>
+</section> -->
 
 @endsection
