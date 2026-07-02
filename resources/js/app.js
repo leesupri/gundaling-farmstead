@@ -111,6 +111,21 @@ function initScrollAnimations() {
         });
     }
 
+    // --- Spice parallax layers (menu hero) – each layer moves at a different speed ---
+    if (document.querySelector('.menu-hero')) {
+        [
+            { sel: '.hero-spice-back',  y: '-15%', scrub: 1.5 },
+            { sel: '.hero-spice-mid',   y: '-32%', scrub: 1.2 },
+            { sel: '.hero-spice-front', y: '-55%', scrub: 0.8 },
+        ].forEach(({ sel, y, scrub }) => {
+            gsap.to(sel, {
+                y,
+                ease: 'none',
+                scrollTrigger: { trigger: '.menu-hero', start: 'top top', end: 'bottom top', scrub },
+            });
+        });
+    }
+
     // --- Timeline progress line draw (About page) ---
     const timelineLine = document.querySelector('.timeline-connector');
     if (timelineLine) {
@@ -262,7 +277,71 @@ function initSceneRail() {
     });
 }
 
+/**
+ * Karo spice parallax stage (menu page): 3 depth layers behind the menu grid
+ * scroll at different rates, each spice adds a slow micro-rotation, and the
+ * whole stage fades in as the section enters. Desktop + no-reduced-motion only.
+ */
+function initSpiceStageParallax() {
+    const menuSection = document.querySelector('#menu');
+    const stage = menuSection?.querySelector('.menu-spice-stage');
+    if (!menuSection || !stage) {
+        return;
+    }
+
+    // Performance hint — promote layers to GPU compositing before scrub starts.
+    gsap.set('.spice-layer', { willChange: 'transform' });
+
+    const layerSpan = { trigger: menuSection, start: 'top bottom', end: 'bottom top' };
+
+    [
+        { sel: '.spice-layer-back',  yPercent: -15, scrub: 1.5 },
+        { sel: '.spice-layer-mid',   yPercent: -30, scrub: 1.2 },
+        { sel: '.spice-layer-front', yPercent: -50, scrub: 0.8 },
+    ].forEach(({ sel, yPercent, scrub }) => {
+        gsap.to(sel, {
+            yPercent,
+            ease: 'none',
+            scrollTrigger: { ...layerSpan, scrub },
+        });
+    });
+
+    // Micro-rotations: alternating CW/CCW per spice so they drift, not just slide.
+    stage.querySelectorAll('.spice-wrap').forEach((wrap, i) => {
+        const direction = i % 2 === 0 ? 1 : -1;
+        const amount = 8 + (i % 3) * 4; // 8, 12, or 16 degrees
+
+        gsap.to(wrap, {
+            rotation: `+=${direction * amount}`,
+            ease: 'none',
+            scrollTrigger: { ...layerSpan, scrub: 2 },
+        });
+    });
+
+    // Whole stage fades in as the menu section enters the viewport.
+    gsap.from(stage, {
+        opacity: 0,
+        duration: 1.2,
+        ease: 'power2.out',
+        scrollTrigger: { trigger: menuSection, start: 'top 80%', toggleActions: 'play none none reverse' },
+    });
+
+    return () => {
+        ScrollTrigger.getAll().forEach((st) => {
+            if (st.vars.trigger === menuSection) {
+                st.kill();
+            }
+        });
+        gsap.set('.spice-layer', { clearProps: 'willChange' });
+    };
+}
+
 const mm = gsap.matchMedia();
+
+// Spice stage: desktop only — under 768px the CSS shows a trimmed static set instead.
+window.addEventListener('load', () => {
+    mm.add('(prefers-reduced-motion: no-preference) and (min-width: 768px)', initSpiceStageParallax);
+});
 
 mm.add('(prefers-reduced-motion: no-preference)', () => {
     // --- Mascot idle floats (scene mascots, not the gated hero mascot) ---

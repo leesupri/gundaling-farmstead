@@ -7,6 +7,142 @@
     $first = $categories->first();
 @endphp
 
+{{-- ── Spice Parallax Hero ─────────────────────────────────────────────────── --}}
+<section class="menu-hero relative overflow-hidden bg-farm-950" style="min-height:52vh">
+
+    {{-- Back layer – slowest on scroll (-15%) – large background botanicals --}}
+    <div class="hero-spice-back absolute inset-0 pointer-events-none select-none">
+        <img src="{{ asset('images/spices/lemongrass.svg') }}"
+             alt="" aria-hidden="true"
+             class="absolute -left-12 -top-10 h-112 opacity-20 -rotate-12">
+        <img src="{{ asset('images/spices/galangal.svg') }}"
+             alt="" aria-hidden="true"
+             class="absolute -right-8 -bottom-16 h-80 opacity-15 rotate-[8deg]">
+    </div>
+
+    {{-- Mid layer – medium speed (-30%) – accent botanicals --}}
+    <div class="hero-spice-mid absolute inset-0 pointer-events-none select-none">
+        <img src="{{ asset('images/spices/turmeric.svg') }}"
+             alt="" aria-hidden="true"
+             class="absolute right-20 -top-6 h-52 opacity-30 rotate-14">
+        <img src="{{ asset('images/spices/kecombrang.svg') }}"
+             alt="" aria-hidden="true"
+             class="absolute left-1/4 -bottom-8 h-60 opacity-25 -rotate-6">
+        <img src="{{ asset('images/spices/Asam-Gelugur.svg') }}"
+             alt="" aria-hidden="true"
+             class="absolute right-[38%] top-10 h-40 opacity-35 rotate-22">
+    </div>
+
+    {{-- Front layer – fastest (-50%) – small foreground accents --}}
+    <div class="hero-spice-front absolute inset-0 pointer-events-none select-none">
+        <img src="{{ asset('images/spices/andaliman.svg') }}"
+             alt="" aria-hidden="true"
+             class="absolute left-16 bottom-8 h-28 opacity-55 -rotate-10">
+        <img src="{{ asset('images/spices/cikala.svg') }}"
+             alt="" aria-hidden="true"
+             class="absolute right-28 top-14 h-32 opacity-50 rotate-[5deg]">
+    </div>
+
+    {{-- Gradient vignette so edges don't look cut off --}}
+    <div class="absolute inset-0 bg-radial-[ellipse_80%_80%_at_50%_50%] from-transparent to-farm-950/70 pointer-events-none"></div>
+
+    {{-- Bottom fade into page body --}}
+    <div class="absolute bottom-0 left-0 right-0 h-20 bg-linear-to-t from-earth-50 to-transparent pointer-events-none"></div>
+
+    {{-- Hero text --}}
+    <div class="relative z-10 text-center pt-40 pb-28 px-6">
+        <p class="hero-content-fade font-sans text-gold text-xs tracking-[0.28em] uppercase mb-5">
+            {{ __('menu.hero_eyebrow') }}
+        </p>
+        <h1 class="hero-content-fade font-display text-white text-5xl md:text-6xl lg:text-7xl leading-none">
+            {{ __('menu.title') }}
+        </h1>
+        <p class="hero-content-fade font-sans text-farm-300 text-base lg:text-lg mt-5 max-w-md mx-auto">
+            {{ __('menu.hero_sub') }}
+        </p>
+    </div>
+</section>
+
+{{-- ── Menu Section: spice stage + content ─────────────────────────────────── --}}
+<section id="menu">
+
+    {{-- Karo spice parallax stage — decorative depth layers behind the menu grid --}}
+    <div class="menu-spice-stage" aria-hidden="true">
+
+        {{-- LAYER 1: BACK — green tint, slow --}}
+        <div class="spice-layer spice-layer-back">
+            <div class="spice-wrap" data-spice="lemongrass" style="--spice-x: 5%; --spice-top: 8%; --spice-rot: -15deg; --spice-scale: 0.6">
+                <img src="{{ asset('images/spices/lemongrass.svg') }}"
+                     alt="" role="presentation" loading="lazy"
+                     class="spice-img" width="220" height="282">
+            </div>
+            <div class="spice-wrap" data-spice="lemongrass" style="--spice-x: 82%; --spice-top: 55%; --spice-rot: 22deg; --spice-scale: 0.55">
+                <img src="{{ asset('images/spices/lemongrass.svg') }}"
+                     alt="" role="presentation" loading="lazy"
+                     class="spice-img" width="220" height="282">
+            </div>
+            <div class="spice-wrap" data-spice="cikala" style="--spice-x: 45%; --spice-top: 72%; --spice-rot: -8deg; --spice-scale: 0.65">
+                <img src="{{ asset('images/spices/cikala.svg') }}"
+                     alt="" role="presentation" loading="lazy"
+                     class="spice-img" width="220" height="282">
+            </div>
+            <div class="spice-wrap" data-spice="cikala" style="--spice-x: 15%; --spice-top: 88%; --spice-rot: 30deg; --spice-scale: 0.58">
+                <img src="{{ asset('images/spices/cikala.svg') }}"
+                     alt="" role="presentation" loading="lazy"
+                     class="spice-img" width="220" height="282">
+            </div>
+        </div>
+
+        {{-- LAYER 2: MID — earth brown tint, medium --}}
+        <div class="spice-layer spice-layer-mid">
+            <div class="spice-wrap" data-spice="galangal" style="--spice-x: 72%; --spice-top: 12%; --spice-rot: 18deg; --spice-scale: 0.75">
+                <img src="{{ asset('images/spices/galangal.svg') }}"
+                     alt="" role="presentation" loading="lazy"
+                     class="spice-img" width="220" height="282">
+            </div>
+            <div class="spice-wrap" data-spice="andaliman" style="--spice-x: 2%; --spice-top: 35%; --spice-rot: -12deg; --spice-scale: 0.7">
+                <img src="{{ asset('images/spices/andaliman.svg') }}"
+                     alt="" role="presentation" loading="lazy"
+                     class="spice-img" width="220" height="282">
+            </div>
+            <div class="spice-wrap" data-spice="turmeric" style="--spice-x: 58%; --spice-top: 60%; --spice-rot: 25deg; --spice-scale: 0.8">
+                <img src="{{ asset('images/spices/turmeric.svg') }}"
+                     alt="" role="presentation" loading="lazy"
+                     class="spice-img" width="220" height="282">
+            </div>
+            <div class="spice-wrap" data-spice="galangal" style="--spice-x: 30%; --spice-top: 82%; --spice-rot: -5deg; --spice-scale: 0.68">
+                <img src="{{ asset('images/spices/galangal.svg') }}"
+                     alt="" role="presentation" loading="lazy"
+                     class="spice-img" width="220" height="282">
+            </div>
+        </div>
+
+        {{-- LAYER 3: FRONT — gold tint, fastest --}}
+        <div class="spice-layer spice-layer-front">
+            <div class="spice-wrap" data-spice="kecombrang" style="--spice-x: 88%; --spice-top: 5%; --spice-rot: -20deg; --spice-scale: 0.9">
+                <img src="{{ asset('images/spices/kecombrang.svg') }}"
+                     alt="" role="presentation" loading="eager"
+                     class="spice-img" width="220" height="282">
+            </div>
+            <div class="spice-wrap" data-spice="kecombrang" style="--spice-x: -4%; --spice-top: 62%; --spice-rot: 15deg; --spice-scale: 0.85">
+                <img src="{{ asset('images/spices/kecombrang.svg') }}"
+                     alt="" role="presentation" loading="lazy"
+                     class="spice-img" width="220" height="282">
+            </div>
+            <div class="spice-wrap" data-spice="asam" style="--spice-x: 40%; --spice-top: 25%; --spice-rot: -32deg; --spice-scale: 1.0">
+                <img src="{{ asset('images/spices/Asam-Gelugur.svg') }}"
+                     alt="" role="presentation" loading="eager"
+                     class="spice-img" width="220" height="282">
+            </div>
+            <div class="spice-wrap" data-spice="asam" style="--spice-x: 70%; --spice-top: 78%; --spice-rot: 10deg; --spice-scale: 0.88">
+                <img src="{{ asset('images/spices/Asam-Gelugur.svg') }}"
+                     alt="" role="presentation" loading="lazy"
+                     class="spice-img" width="220" height="282">
+            </div>
+        </div>
+
+    </div>
+
 <div
     x-data="{
         active: '{{ $first?->slug }}',
@@ -26,12 +162,10 @@
             gsap.fromTo(el, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' });
         },
     }"
-    class="pt-32 pb-20 px-6 lg:px-12 max-w-6xl mx-auto"
+    class="menu-content pb-20 px-6 lg:px-12 max-w-6xl mx-auto"
 >
-    <h1 class="font-display text-4xl text-farm-900 text-center mb-8">{{ __('menu.title') }}</h1>
-
     {{-- Foods / Drinks / Retail toggle --}}
-    <div class="flex justify-center gap-2 mb-8">
+    <div class="flex justify-center gap-2 pt-8 mb-8">
         @foreach (['foods' => __('menu.foods'), 'drinks' => __('menu.drinks'), 'retail' => __('menu.retail')] as $dept => $label)
             <button
                 @click="department = '{{ $dept }}'"
@@ -132,5 +266,7 @@
         </section>
     @endforeach
 </div>
+
+</section>
 
 @endsection

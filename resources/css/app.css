@@ -68,4 +68,74 @@
             opacity: 0.2;
         }
     }
+
+    /* ─── SPICE PARALLAX STAGE (menu page) ─── */
+    #menu {
+        position: relative; /* stage needs positioned parent */
+        overflow: hidden; /* clip spices that drift outside bounds */
+    }
+
+    .menu-spice-stage {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none; /* never block menu item clicks */
+        user-select: none;
+    }
+
+    /* Menu content must sit above the stage */
+    .menu-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .spice-layer {
+        position: absolute;
+        inset: 0;
+        /* GSAP applies will-change on init */
+    }
+
+    .spice-wrap {
+        position: absolute;
+        left: var(--spice-x);
+        top: var(--spice-top);
+        transform: rotate(var(--spice-rot)) scale(var(--spice-scale));
+        transform-origin: center center;
+        /* GSAP controls translateY/rotation deltas — don't add more transforms here */
+    }
+
+    .spice-img {
+        display: block;
+        width: 220px; /* fixed render size — SVG scales via scale() */
+        height: auto;
+    }
+
+    /* Layer tints — grayscale SVGs re-coloured to brand via CSS filter */
+    .spice-layer-back .spice-img {
+        filter: grayscale(1) sepia(0.6) hue-rotate(60deg) saturate(1.4) brightness(0.7) opacity(0.07);
+    }
+
+    .spice-layer-mid .spice-img {
+        filter: grayscale(1) sepia(0.8) hue-rotate(10deg) saturate(1.2) brightness(0.65) opacity(0.09);
+    }
+
+    .spice-layer-front .spice-img {
+        filter: grayscale(1) sepia(1) hue-rotate(10deg) saturate(2) brightness(0.85) opacity(0.1);
+    }
+
+    /* Mobile: back + mid layers off entirely, front trimmed to 3 spices, smaller render */
+    @media (max-width: 767px) {
+        .spice-layer-back,
+        .spice-layer-mid {
+            display: none;
+        }
+
+        .spice-layer-front .spice-wrap:nth-child(n + 4) {
+            display: none;
+        }
+
+        .spice-img {
+            width: 150px;
+        }
+    }
 }
