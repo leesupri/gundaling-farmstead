@@ -13,6 +13,11 @@ Alpine.start();
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, MotionPathPlugin, SplitText);
 
+// Menu hero 3D carousel — code-split, only fetched when the hero is on the page.
+if (document.getElementById('menu-hero')) {
+    import('./menu-carousel.js');
+}
+
 /** All scene reveals, parallax, stagger grids, timeline, and counters — registered once layout is stable. */
 function initScrollAnimations() {
     // --- Hero background parallax (every page with a .hero-bg image, not just the homepage) ---

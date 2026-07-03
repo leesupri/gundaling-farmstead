@@ -72,7 +72,8 @@
     /* ─── SPICE PARALLAX STAGE (menu page) ─── */
     #menu {
         position: relative; /* stage needs positioned parent */
-        overflow: hidden; /* clip spices that drift outside bounds */
+        overflow: clip; /* clip drifting spices; unlike `hidden` this keeps position:sticky working inside */
+        background: var(--color-farm-950); /* one dark world: hero and body share the same surface */
     }
 
     .menu-spice-stage {
@@ -110,17 +111,17 @@
         height: auto;
     }
 
-    /* Layer tints — grayscale SVGs re-coloured to brand via CSS filter */
+    /* Layer tints — grayscale SVGs lifted to read on the dark farm-950 surface */
     .spice-layer-back .spice-img {
-        filter: grayscale(1) sepia(0.6) hue-rotate(60deg) saturate(1.4) brightness(0.7) opacity(0.07);
+        filter: grayscale(1) brightness(1.4) opacity(0.08);
     }
 
     .spice-layer-mid .spice-img {
-        filter: grayscale(1) sepia(0.8) hue-rotate(10deg) saturate(1.2) brightness(0.65) opacity(0.09);
+        filter: grayscale(1) sepia(0.4) brightness(1.2) opacity(0.1);
     }
 
     .spice-layer-front .spice-img {
-        filter: grayscale(1) sepia(1) hue-rotate(10deg) saturate(2) brightness(0.85) opacity(0.1);
+        filter: grayscale(1) sepia(0.6) brightness(1.1) opacity(0.12);
     }
 
     /* Mobile: back + mid layers off entirely, front trimmed to 3 spices, smaller render */
@@ -136,6 +137,281 @@
 
         .spice-img {
             width: 150px;
+        }
+    }
+
+    /* ─── MENU HERO — 3D COVERFLOW CAROUSEL ─── */
+    .menu-hero {
+        position: relative;
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 1fr 1.1fr;
+        align-items: center;
+        gap: 2rem;
+        padding: 80px 3rem 0 4rem; /* top = nav height */
+        background: var(--color-farm-950);
+        overflow: hidden;
+    }
+
+    /* Radial overlay so text never fights with the spice layers behind it */
+    .menu-hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+            ellipse at 20% 50%,
+            rgba(14, 24, 16, 0.85) 0%,
+            rgba(14, 24, 16, 0.4) 60%,
+            transparent 100%
+        );
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    /* ── TEXT SIDE ── */
+    .menu-hero-text {
+        position: relative;
+        z-index: 3;
+    }
+
+    .menu-hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--font-sans);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--color-gold);
+        margin-bottom: 1.2rem;
+        opacity: 0; /* GSAP reveals */
+    }
+
+    .eyebrow-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--color-gold);
+        animation: pulseDot 2.2s ease-in-out infinite;
+    }
+
+    @keyframes pulseDot {
+        0%,
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        50% {
+            transform: scale(1.8);
+            opacity: 0.4;
+        }
+    }
+
+    .menu-hero-title {
+        font-family: var(--font-display);
+        font-size: clamp(3.2rem, 5.5vw, 5.5rem);
+        font-weight: 700;
+        color: #fff7ed;
+        line-height: 1;
+        margin-bottom: 1rem;
+        opacity: 0; /* GSAP SplitText reveals */
+    }
+
+    .menu-hero-sub {
+        font-family: var(--font-sans);
+        font-size: 1rem;
+        line-height: 1.75;
+        color: rgba(255, 247, 237, 0.75);
+        max-width: 420px;
+        margin-bottom: 1.5rem;
+        opacity: 0; /* GSAP reveals */
+    }
+
+    /* Dynamic label that updates per slide */
+    .menu-slide-label-wrap {
+        margin-bottom: 1.8rem;
+        height: 28px; /* fixed height prevents layout shift */
+        overflow: hidden;
+    }
+
+    .menu-slide-label {
+        display: inline-block;
+        font-family: var(--font-sans);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #fff7ed;
+        background: rgba(255, 247, 237, 0.1);
+        border: 1px solid rgba(255, 247, 237, 0.2);
+        padding: 5px 14px;
+        border-radius: 20px;
+    }
+
+    /* Dot nav */
+    .carousel-dots {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+
+    .carousel-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255, 247, 237, 0.25);
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        padding: 0;
+    }
+
+    .carousel-dot.active {
+        width: 24px;
+        border-radius: 4px;
+        background: var(--color-gold);
+    }
+
+    /* ── CAROUSEL STAGE ── */
+    .carousel-stage-wrap {
+        position: relative;
+        z-index: 2;
+        height: 580px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        perspective: 1200px;
+        perspective-origin: 50% 50%;
+    }
+
+    .carousel-stage {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        touch-action: pan-y; /* keep vertical scroll, capture horizontal drags */
+    }
+
+    /* ── INDIVIDUAL CARD ── */
+    .carousel-card {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 400px;
+        height: 480px;
+        margin: -240px 0 0 -200px; /* center anchor — GSAP owns transform entirely */
+        border-radius: 20px;
+        overflow: hidden;
+        cursor: pointer;
+        transform-style: preserve-3d;
+        transition: box-shadow 0.3s ease;
+        will-change: transform, opacity;
+    }
+
+    .carousel-card:hover {
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+    }
+
+    .carousel-card-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+        user-select: none;
+    }
+
+    /* Colored glow behind each card — color from dish palette */
+    .card-glow {
+        position: absolute;
+        inset: -20px;
+        border-radius: 30px;
+        background: radial-gradient(ellipse, var(--glow-color, #f5c542) 0%, transparent 65%);
+        opacity: 0; /* GSAP fades in on active card */
+        z-index: -1;
+        filter: blur(30px);
+    }
+
+    /* Arrows */
+    .carousel-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(255, 247, 237, 0.1);
+        border: 1px solid rgba(255, 247, 237, 0.2);
+        color: #fff7ed;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+            background 0.2s,
+            transform 0.2s;
+        backdrop-filter: blur(8px);
+    }
+
+    .carousel-arrow:hover {
+        background: rgba(245, 197, 66, 0.2);
+        border-color: rgba(245, 197, 66, 0.4);
+        transform: translateY(-50%) scale(1.08);
+    }
+
+    .carousel-prev {
+        left: 0.5rem;
+    }
+
+    .carousel-next {
+        right: 0.5rem;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 1024px) {
+        .menu-hero {
+            grid-template-columns: 1fr;
+            padding: 6.5rem 1.5rem 3rem;
+            min-height: auto;
+        }
+
+        .menu-hero-text {
+            text-align: center;
+        }
+
+        .carousel-dots {
+            justify-content: center;
+        }
+
+        .menu-hero-sub {
+            margin: 0 auto 1.5rem;
+        }
+
+        .carousel-stage-wrap {
+            height: 380px;
+        }
+
+        .carousel-card {
+            width: 280px;
+            height: 336px;
+            margin: -168px 0 0 -140px;
+        }
+    }
+
+    @media (max-width: 540px) {
+        .carousel-stage-wrap {
+            height: 300px;
+        }
+
+        .carousel-card {
+            width: 230px;
+            height: 276px;
+            margin: -138px 0 0 -115px;
+        }
+
+        .carousel-arrow {
+            display: none;
         }
     }
 }

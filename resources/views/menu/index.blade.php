@@ -5,61 +5,118 @@
 @php
     $prefix = app()->getLocale() === 'id' ? 'id.' : '';
     $first = $categories->first();
+
+    // Carousel media + accent color per slide; label/title/desc come from lang files.
+    $heroMedia = [
+        ['img' => 'aab_menu-2.jpg', 'color' => '#F5C542'], // gold — warm cheese tones
+        ['img' => 'aab_menu-4.jpg', 'color' => '#E8943A'], // amber
+        ['img' => 'aab_menu-3.jpg', 'color' => '#6BA44E'], // farm green — pesto
+        ['img' => 'aab_menu-1.jpg', 'color' => '#D4520E'], // fire — earthy Karo tones
+        ['img' => 'aab_menu-6.jpg', 'color' => '#C084B8'], // soft pink — flower/dessert
+        ['img' => 'aab_menu-5.jpg', 'color' => '#A8876E'], // tan — aged cheese
+        ['img' => 'aab_menu-7.jpg', 'color' => '#765F52'], // warm brown
+    ];
+    $heroSlides = array_map(
+        fn ($media, $text) => array_merge($media, $text),
+        $heroMedia,
+        __('menu.hero_slides'),
+    );
 @endphp
 
-{{-- ── Spice Parallax Hero ─────────────────────────────────────────────────── --}}
-<section class="menu-hero relative overflow-hidden bg-farm-950" style="min-height:52vh">
+{{-- ── Menu Hero: 3D coverflow carousel above the spice parallax ───────────── --}}
+<section id="menu-hero" class="menu-hero" aria-label="{{ __('menu.slides_aria') }}">
 
-    {{-- Back layer – slowest on scroll (-15%) – large background botanicals --}}
+    {{-- Quiet spice depth: one botanical per layer, low opacity, parallax only --}}
     <div class="hero-spice-back absolute inset-0 pointer-events-none select-none">
         <img src="{{ asset('images/spices/lemongrass.svg') }}"
              alt="" aria-hidden="true"
-             class="absolute -left-12 -top-10 h-112 opacity-20 -rotate-12">
-        <img src="{{ asset('images/spices/galangal.svg') }}"
-             alt="" aria-hidden="true"
-             class="absolute -right-8 -bottom-16 h-80 opacity-15 rotate-[8deg]">
+             class="absolute -left-12 -top-10 h-112 opacity-15 -rotate-12">
     </div>
 
-    {{-- Mid layer – medium speed (-30%) – accent botanicals --}}
     <div class="hero-spice-mid absolute inset-0 pointer-events-none select-none">
-        <img src="{{ asset('images/spices/turmeric.svg') }}"
-             alt="" aria-hidden="true"
-             class="absolute right-20 -top-6 h-52 opacity-30 rotate-14">
         <img src="{{ asset('images/spices/kecombrang.svg') }}"
              alt="" aria-hidden="true"
-             class="absolute left-1/4 -bottom-8 h-60 opacity-25 -rotate-6">
-        <img src="{{ asset('images/spices/Asam-Gelugur.svg') }}"
-             alt="" aria-hidden="true"
-             class="absolute right-[38%] top-10 h-40 opacity-35 rotate-22">
+             class="absolute left-1/4 -bottom-8 h-60 opacity-20 -rotate-6">
     </div>
 
-    {{-- Front layer – fastest (-50%) – small foreground accents --}}
     <div class="hero-spice-front absolute inset-0 pointer-events-none select-none">
         <img src="{{ asset('images/spices/andaliman.svg') }}"
              alt="" aria-hidden="true"
-             class="absolute left-16 bottom-8 h-28 opacity-55 -rotate-10">
-        <img src="{{ asset('images/spices/cikala.svg') }}"
-             alt="" aria-hidden="true"
-             class="absolute right-28 top-14 h-32 opacity-50 rotate-[5deg]">
+             class="absolute left-16 bottom-8 h-28 opacity-35 -rotate-10">
     </div>
 
-    {{-- Gradient vignette so edges don't look cut off --}}
-    <div class="absolute inset-0 bg-radial-[ellipse_80%_80%_at_50%_50%] from-transparent to-farm-950/70 pointer-events-none"></div>
+    {{-- Dark radial overlay so text always reads over the spice layers --}}
+    <div class="menu-hero-overlay"></div>
 
-    {{-- Bottom fade into page body --}}
-    <div class="absolute bottom-0 left-0 right-0 h-20 bg-linear-to-t from-earth-50 to-transparent pointer-events-none"></div>
 
-    {{-- Hero text --}}
-    <div class="relative z-10 text-center pt-40 pb-28 px-6">
-        <p class="hero-content-fade font-sans text-gold text-xs tracking-[0.28em] uppercase mb-5">
+    {{-- ── HEADLINE (left, reacts to slide changes) ── --}}
+    <div class="menu-hero-text" aria-live="polite">
+        <p class="menu-hero-eyebrow">
+            <span class="eyebrow-dot"></span>
             {{ __('menu.hero_eyebrow') }}
         </p>
-        <h1 class="hero-content-fade font-display text-white text-5xl md:text-6xl lg:text-7xl leading-none">
-            {{ __('menu.title') }}
-        </h1>
-        <p class="hero-content-fade font-sans text-farm-300 text-base lg:text-lg mt-5 max-w-md mx-auto">
-            {{ __('menu.hero_sub') }}
-        </p>
+        <h1 class="menu-hero-title">{{ __('menu.title') }}</h1>
+        <p class="menu-hero-sub">{{ __('menu.hero_sub') }}</p>
+
+        {{-- Dynamic slide label that changes with active card --}}
+        <div class="menu-slide-label-wrap">
+            <span class="menu-slide-label" id="slideLabel">{{ $heroSlides[0]['label'] }}</span>
+        </div>
+
+        {{-- Progress dots --}}
+        <div class="carousel-dots" role="tablist" aria-label="{{ __('menu.slides_aria') }}">
+            @foreach ($heroSlides as $i => $slide)
+                <button
+                    class="carousel-dot {{ $i === 0 ? 'active' : '' }}"
+                    role="tab"
+                    aria-label="{{ __('menu.slide_n', ['n' => $i + 1]) }}"
+                    data-index="{{ $i }}"
+                ></button>
+            @endforeach
+        </div>
+    </div>
+
+    {{-- ── 3D CAROUSEL STAGE ── --}}
+    <div class="carousel-stage-wrap">
+        <div class="carousel-stage" id="carouselStage">
+            @foreach ($heroSlides as $i => $slide)
+                <div
+                    class="carousel-card {{ $i === 0 ? 'is-active' : '' }}"
+                    data-index="{{ $i }}"
+                    data-color="{{ $slide['color'] }}"
+                    data-label="{{ $slide['label'] }}"
+                    role="tab"
+                    tabindex="{{ $i === 0 ? '0' : '-1' }}"
+                    aria-selected="{{ $i === 0 ? 'true' : 'false' }}"
+                    aria-label="{{ $slide['label'] }}: {{ $slide['title'] }}"
+                >
+                    <img
+                        src="{{ asset('images/menu/hero/' . $slide['img']) }}"
+                        alt="{{ $slide['title'] }}"
+                        class="carousel-card-img"
+                        loading="{{ $i < 3 ? 'eager' : 'lazy' }}"
+                        draggable="false"
+                        width="640"
+                        height="480"
+                    >
+
+                    {{-- Colored accent glow matching dish palette --}}
+                    <div class="card-glow" style="--glow-color: {{ $slide['color'] }}"></div>
+                </div>
+            @endforeach
+        </div>
+
+        {{-- Prev / Next arrows --}}
+        <button class="carousel-arrow carousel-prev" id="carouselPrev" aria-label="{{ __('menu.prev_dish') }}">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M12 4L6 10L12 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+        <button class="carousel-arrow carousel-next" id="carouselNext" aria-label="{{ __('menu.next_dish') }}">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M8 4L14 10L8 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
     </div>
 </section>
 
@@ -147,13 +204,22 @@
     x-data="{
         active: '{{ $first?->slug }}',
         department: 'foods',
+        firstSlugs: {{ Js::from($categories->groupBy('department')->map(fn ($group) => $group->first()->slug)) }},
         mounted: false,
         init() {
             this.$nextTick(() => { this.mounted = true });
         },
+        switchDepartment(dept) {
+            if (this.department === dept) return;
+            this.department = dept;
+            const slug = this.firstSlugs[dept];
+            if (slug) {
+                this.$nextTick(() => this.scrollToSection(slug));
+            }
+        },
         scrollToSection(slug) {
             this.active = slug;
-            gsap.to(window, { duration: 0.7, ease: 'power2.inOut', scrollTo: { y: '#' + slug, offsetY: 140 } });
+            gsap.to(window, { duration: 0.7, ease: 'power2.inOut', scrollTo: { y: '#' + slug, offsetY: 220 } });
         },
         animateSectionIn(el) {
             if (!this.mounted || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -164,33 +230,40 @@
     }"
     class="menu-content pb-20 px-6 lg:px-12 max-w-6xl mx-auto"
 >
-    {{-- Foods / Drinks / Retail toggle --}}
-    <div class="flex justify-center gap-2 pt-8 mb-8">
-        @foreach (['foods' => __('menu.foods'), 'drinks' => __('menu.drinks'), 'retail' => __('menu.retail')] as $dept => $label)
-            <button
-                @click="department = '{{ $dept }}'"
-                :class="department === '{{ $dept }}' ? 'bg-farm-600 text-white' : 'bg-farm-50 text-farm-700'"
-                class="px-6 py-2 rounded-full font-bold transition-colors duration-200 cursor-pointer"
-            >
-                {{ $label }}
-            </button>
-        @endforeach
-    </div>
-
-    {{-- Sticky category nav --}}
-    <div class="sticky top-20 z-30 bg-earth-50/95 backdrop-blur-md py-3 -mx-6 px-6 lg:-mx-12 lg:px-12 mb-10 overflow-x-auto">
-        <div class="flex gap-2 min-w-max">
-            @foreach ($categories as $cat)
-                <a
-                    href="#{{ $cat->slug }}"
-                    @click.prevent="scrollToSection('{{ $cat->slug }}')"
-                    x-show="department === '{{ $cat->department }}'"
-                    :class="active === '{{ $cat->slug }}' ? 'bg-farm-600 text-white' : 'bg-white text-farm-700'"
-                    class="px-4 py-2 rounded-full text-sm font-bold whitespace-nowrap transition-colors duration-200 cursor-pointer"
+    {{-- Sticky wayfinding bar: department + categories pinned below the header --}}
+    <div class="sticky top-20 z-30 bg-farm-950/90 backdrop-blur-md -mx-6 px-6 lg:-mx-12 lg:px-12 mb-10 pt-4 border-b border-white/5">
+        {{-- Foods / Drinks / Retail --}}
+        <div class="flex justify-center gap-2">
+            @foreach (['foods' => __('menu.foods'), 'drinks' => __('menu.drinks'), 'retail' => __('menu.retail')] as $dept => $label)
+                <button
+                    @click="switchDepartment('{{ $dept }}')"
+                    :class="department === '{{ $dept }}'
+                        ? 'bg-gold text-farm-950 hover:bg-amber'
+                        : 'bg-white/5 text-farm-100 border border-white/10 hover:bg-white/15 hover:text-white hover:border-gold/40'"
+                    class="px-5 py-1.5 rounded-full text-sm font-bold transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
                 >
-                    {{ $cat->localName() }}
-                </a>
+                    {{ $label }}
+                </button>
             @endforeach
+        </div>
+
+        {{-- Categories of the active department --}}
+        <div class="py-3 overflow-x-auto">
+            <div class="flex gap-2 w-max mx-auto">
+                @foreach ($categories as $cat)
+                    <a
+                        href="#{{ $cat->slug }}"
+                        @click.prevent="scrollToSection('{{ $cat->slug }}')"
+                        x-show="department === '{{ $cat->department }}'"
+                        :class="active === '{{ $cat->slug }}'
+                            ? 'bg-gold text-farm-950 hover:bg-amber'
+                            : 'bg-white/5 text-farm-100 hover:bg-white/15 hover:text-white'"
+                        class="px-4 py-2 rounded-full text-sm font-bold whitespace-nowrap transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
+                    >
+                        {{ $cat->localName() }}
+                    </a>
+                @endforeach
+            </div>
         </div>
     </div>
 
@@ -199,19 +272,23 @@
             id="{{ $cat->slug }}"
             x-show="department === '{{ $cat->department }}'"
             x-effect="department === '{{ $cat->department }}' && animateSectionIn($el)"
-            class="mb-16"
+            x-intersect:enter.margin.-45%.0px.-45%.0px="active = '{{ $cat->slug }}'"
+            class="mb-16 scroll-mt-52"
         >
-            <h2 class="font-display text-2xl text-farm-600 mb-6">{{ $cat->localName() }}</h2>
+            <h2 class="font-display text-2xl text-gold mb-6 flex items-center gap-4">
+                {{ $cat->localName() }}
+                <span class="flex-1 h-px bg-white/10" aria-hidden="true"></span>
+            </h2>
 
             <div class="menu-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse ($cat->items as $item)
-                    <div class="menu-item-card relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+                    <div class="menu-item-card relative bg-white/4 border border-white/8 rounded-xl overflow-hidden hover:border-gold/40 transition-colors duration-300">
                         <div class="relative aspect-video overflow-hidden">
                             @if ($item->image)
                                 <img src="{{ str_starts_with($item->image, '/') ? $item->image : '/storage/' . $item->image }}" alt="{{ $item->localName() }}" class="w-full h-full object-cover" loading="lazy">
                             @else
-                                <div class="w-full h-full bg-linear-to-br from-farm-200 to-earth-200 flex items-center justify-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-farm-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <div class="w-full h-full bg-linear-to-br from-farm-800/60 to-farm-950 flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-farm-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7l9-4 9 4-9 4-9-4zm0 0v10l9 4 9-4V7" />
                                     </svg>
                                 </div>
@@ -224,19 +301,19 @@
                             @endif
 
                             @if ($item->is_sold_out)
-                                <div class="absolute inset-0 bg-red-600/65 flex items-center justify-center">
-                                    <span class="text-white font-bold tracking-widest uppercase text-sm">{{ __('common.sold_out') }}</span>
+                                <div class="absolute inset-0 bg-farm-950/75 flex items-center justify-center">
+                                    <span class="bg-fire text-white font-bold tracking-widest uppercase text-xs px-4 py-1.5 rounded-full">{{ __('common.sold_out') }}</span>
                                 </div>
                             @endif
                         </div>
 
                         <div class="p-4">
-                            <h3 class="font-display text-farm-950">{{ $item->localName() }}</h3>
-                            <p class="text-earth-600 text-sm mt-1 line-clamp-2">{{ $item->localDescription() }}</p>
+                            <h3 class="font-display text-earth-200">{{ $item->localName() }}</h3>
+                            <p class="text-farm-200 text-sm mt-1 line-clamp-2">{{ $item->localDescription() }}</p>
 
                             <div class="flex flex-wrap gap-3 mt-3">
                                 @forelse ($item->activePrices() as $label => $value)
-                                    <span class="text-farm-600 font-bold text-sm">
+                                    <span class="text-gold font-bold text-sm">
                                         @if ($label !== 'Price'){{ $label }}: @endif
                                         Rp {{ number_format($value, 0, ',', '.') }}
                                     </span>
@@ -246,11 +323,11 @@
                             </div>
 
                             @if ($item->notes)
-                                <p class="text-earth-500 text-xs mt-2 italic">{{ $item->notes }}</p>
+                                <p class="text-earth-400 text-xs mt-2 italic">{{ $item->notes }}</p>
                             @endif
 
                             @if ($item->is_featured)
-                                <span class="inline-flex items-center gap-1 mt-3 text-xs text-farm-500">
+                                <span class="inline-flex items-center gap-1 mt-3 text-xs text-farm-300">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 21c-4-3-7-6.5-7-10.5A7 7 0 0112 3a7 7 0 017 7.5C19 14.5 16 18 12 21z" />
                                     </svg>
@@ -260,7 +337,7 @@
                         </div>
                     </div>
                 @empty
-                    <p class="text-earth-500 col-span-full">—</p>
+                    <p class="text-farm-300 col-span-full">—</p>
                 @endforelse
             </div>
         </section>
