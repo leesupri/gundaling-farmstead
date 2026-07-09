@@ -140,6 +140,69 @@
         }
     }
 
+    /* ─── GOOGLE REVIEWS — dual-brand auto-scroll marquee (home) ─── */
+    .reviews-columns {
+        mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+        -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+    }
+
+    .reviews-col-up {
+        animation: reviewScrollUp 32s linear infinite;
+    }
+
+    .reviews-col-down {
+        animation: reviewScrollDown 38s linear infinite;
+    }
+
+    @keyframes reviewScrollUp {
+        0% {
+            transform: translateY(0);
+        }
+        100% {
+            transform: translateY(-50%);
+        }
+    }
+
+    @keyframes reviewScrollDown {
+        0% {
+            transform: translateY(-50%);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+    /* Hovering anywhere in the section pauses all columns */
+    .reviews-section:hover .reviews-col-up,
+    .reviews-section:hover .reviews-col-down {
+        animation-play-state: paused;
+    }
+
+    /* Desktop: the whole wall leans back in 3D; hover flattens it for reading
+       (the same gesture that pauses the scroll). */
+    @media (min-width: 1024px) {
+        .reviews-columns {
+            transform: perspective(1600px) rotateX(16deg) rotateZ(-3deg) scale(1.06);
+            transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reviews-section:hover .reviews-columns {
+            transform: perspective(1600px) rotateX(0deg) rotateZ(0deg) scale(1);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .reviews-col-up,
+        .reviews-col-down {
+            animation: none;
+        }
+
+        .reviews-columns {
+            transform: none !important;
+            transition: none !important;
+        }
+    }
+
     /* ─── MENU HERO — 3D COVERFLOW CAROUSEL ─── */
     .menu-hero {
         position: relative;

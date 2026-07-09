@@ -39,4 +39,8 @@ return [
     ],
     'kitchen_pills' => ['Wood-fire', 'Open Kitchen', 'Farm Ingredients'],
     'testimonial_quote' => 'We did not plan to become a restaurant. The cows planned it for us.',
+    'reviews_eyebrow' => 'Google Reviews',
+    'reviews_title_1' => 'Stories from',
+    'reviews_title_2' => 'our guests',
+    'reviews_sub' => 'Visitors from Medan, Jakarta and beyond share their experiences of Berastagi.',
 ];

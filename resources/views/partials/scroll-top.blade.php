@@ -1,7 +1,7 @@
 <div
     x-data="{ show: false }"
     x-init="window.addEventListener('scroll', () => {
-        show = (window.scrollY + window.innerHeight) >= (document.documentElement.scrollHeight - 400);
+        show = (window.scrollY + window.innerHeight) >= (document.documentElement.scrollHeight - 3000);
     })"
     x-show="show"
     x-transition:enter="transition ease-out duration-300"

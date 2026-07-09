@@ -39,4 +39,8 @@ return [
     ],
     'kitchen_pills' => ['Oven Kayu Bakar', 'Dapur Terbuka', 'Bahan dari Farm'],
     'testimonial_quote' => 'Kami tidak berencana menjadi restoran. Sapi-sapi yang merencanakannya untuk kami.',
+    'reviews_eyebrow' => 'Ulasan Google',
+    'reviews_title_1' => 'Cerita dari',
+    'reviews_title_2' => 'tamu kami',
+    'reviews_sub' => 'Pengunjung dari Medan, Jakarta, hingga mancanegara — berbagi pengalaman mereka di Berastagi.',
 ];

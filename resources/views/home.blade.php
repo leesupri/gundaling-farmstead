@@ -229,6 +229,9 @@
 </section>
 @endif
 
+{{-- GOOGLE REVIEWS — dual-brand auto-scroll wall (static samples until GBP API is live) --}}
+@include('partials.reviews')
+
 {{-- BRIDGE TO FARM --}}
 <section class="scene relative py-32 px-6 lg:px-12 overflow-hidden">
     <img src="/images/hero/DJI_0016-1.jpg" alt="Aerial view of Gundaling Farmstead and the farm valley" class="absolute inset-0 w-full h-full object-cover" style="object-position: center 60%" loading="lazy">
