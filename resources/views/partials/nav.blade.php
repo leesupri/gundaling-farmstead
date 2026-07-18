@@ -36,7 +36,7 @@
             <a href="{{ route($prefix . 'about') }}" class="hover:text-gold transition-colors duration-200 cursor-pointer">{{ __('nav.about') }}</a>
             <a href="{{ route($prefix . 'contact') }}" class="hover:text-gold transition-colors duration-200 cursor-pointer">{{ __('nav.contact') }}</a>
 
-            <a href="https://gundalingfarm.com" target="_blank" rel="noopener" class="flex items-center gap-1 text-farm-200 hover:text-gold transition-colors duration-200 cursor-pointer">
+            <a href="{{ $siteSettings->farm_url }}" target="_blank" rel="noopener" class="flex items-center gap-1 text-farm-200 hover:text-gold transition-colors duration-200 cursor-pointer">
                 {{ __('nav.visit_farm') }} ↗
             </a>
 
@@ -64,7 +64,7 @@
         <a href="{{ route($prefix . 'promo') }}" class="cursor-pointer">{{ __('nav.promo') }}</a>
         <a href="{{ route($prefix . 'about') }}" class="cursor-pointer">{{ __('nav.about') }}</a>
         <a href="{{ route($prefix . 'contact') }}" class="cursor-pointer">{{ __('nav.contact') }}</a>
-        <a href="https://gundalingfarm.com" target="_blank" rel="noopener" class="cursor-pointer">{{ __('nav.visit_farm') }} ↗</a>
+        <a href="{{ $siteSettings->farm_url }}" target="_blank" rel="noopener" class="cursor-pointer">{{ __('nav.visit_farm') }} ↗</a>
         <a href="{{ route($prefix . 'reservations') }}" class="bg-gold text-farm-950 font-bold px-5 py-2 rounded-full text-center cursor-pointer">
             {{ __('nav.reserve') }}
         </a>

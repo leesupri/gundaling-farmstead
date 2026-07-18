@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Reservations\Tables;
 
 use App\Models\Reservation;
+use App\Models\Setting;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -105,7 +106,7 @@ class ReservationsTable
                 Action::make('waLink')
                     ->label('WA Link')
                     ->icon('heroicon-o-chat-bubble-left-right')
-                    ->url(fn (Reservation $record) => 'https://wa.me/6282162599980?text=' . rawurlencode(
+                    ->url(fn (Reservation $record) => Setting::current()->whatsappUrl(
                         "Hi {$record->name}, your reservation at Gundaling Farmstead on {$record->date->format('d M Y')} at {$record->time} for {$record->guests} guests is confirmed. We look forward to welcoming you!"
                     ))
                     ->openUrlInNewTab(),

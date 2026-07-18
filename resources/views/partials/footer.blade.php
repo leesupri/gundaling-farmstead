@@ -33,7 +33,7 @@
 
         <div>
             <h3 class="font-display text-lg text-white mb-4">{{ __('common.footer_the_farm') }}</h3>
-            <a href="https://gundalingfarm.com" target="_blank" rel="noopener" class="text-farm-300 hover:text-gold cursor-pointer">
+            <a href="{{ $siteSettings->farm_url }}" target="_blank" rel="noopener" class="text-farm-300 hover:text-gold cursor-pointer">
                 {{ __('common.footer_visit_farm') }} ↗
             </a>
         </div>
@@ -41,10 +41,10 @@
         <div>
             <h3 class="font-display text-lg text-white mb-4">{{ __('common.footer_find_us') }}</h3>
             <address class="text-farm-300 not-italic space-y-1">
-                <p>Jl. Jamin Ginting, Desa Jaranguda, Simpang Pelawi, Kabupaten Karo, Berastagi 22158, North Sumatra</p>
+                <p>{{ $siteSettings->address }}</p>
                 <p>{{ __('reservations.hours_value') }}</p>
-                <p><a href="https://wa.me/6282162599980" target="_blank" rel="noopener" class="hover:text-gold cursor-pointer">+62 821-6259-9980</a></p>
-                <p><a href="mailto:info@gundalingfarmstead.com" class="hover:text-gold cursor-pointer">info@gundalingfarmstead.com</a></p>
+                <p><a href="{{ $siteSettings->whatsappUrl() }}" target="_blank" rel="noopener" class="hover:text-gold cursor-pointer">{{ $siteSettings->whatsapp_display }}</a></p>
+                <p><a href="mailto:{{ $siteSettings->email }}" class="hover:text-gold cursor-pointer">{{ $siteSettings->email }}</a></p>
             </address>
         </div>
     </div>
@@ -52,8 +52,8 @@
     <div class="border-t border-farm-800 py-6 px-6 lg:px-12 text-center text-farm-400 text-sm">
         © {{ date('Y') }} Gundaling Farmstead · PT. Anugerah Alam Berastagi
         <span class="mx-2">|</span>
-        <a href="https://pimsgundaling.com" target="_blank" rel="noopener" class="hover:text-gold cursor-pointer">pimsgundaling.com</a>
+        <a href="{{ $siteSettings->pims_url }}" target="_blank" rel="noopener" class="hover:text-gold cursor-pointer">{{ parse_url($siteSettings->pims_url, PHP_URL_HOST) }}</a>
         <span class="mx-1">|</span>
-        <a href="https://gundalingfarm.com" target="_blank" rel="noopener" class="hover:text-gold cursor-pointer">gundalingfarm.com</a>
+        <a href="{{ $siteSettings->farm_url }}" target="_blank" rel="noopener" class="hover:text-gold cursor-pointer">{{ parse_url($siteSettings->farm_url, PHP_URL_HOST) }}</a>
     </div>
 </footer>

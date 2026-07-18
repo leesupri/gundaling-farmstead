@@ -10,6 +10,6 @@
         We're doing some quick maintenance. Please check back in a little while.
     </p>
     <div class="actions">
-        <a href="https://wa.me/6282162599980" target="_blank" rel="noopener" class="btn btn-gold">Message us on WhatsApp</a>
+        <a href="{{ $siteSettings->whatsappUrl() }}" target="_blank" rel="noopener" class="btn btn-gold">Message us on WhatsApp</a>
     </div>
 @endsection

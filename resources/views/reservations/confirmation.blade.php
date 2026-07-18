@@ -24,7 +24,7 @@
         ]);
     @endphp
     <a
-        href="https://wa.me/6282162599980?text={{ rawurlencode($waMessage) }}"
+        href="{{ $siteSettings->whatsappUrl($waMessage) }}"
         target="_blank" rel="noopener"
         class="inline-block bg-[#25D366] text-white font-bold px-8 py-3 rounded-full hover:opacity-90 transition-opacity duration-200 cursor-pointer"
     >

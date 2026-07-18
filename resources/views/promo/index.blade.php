@@ -97,7 +97,7 @@
 <div class="bg-earth-200 py-10 px-6 text-center">
     <p class="text-earth-700 mb-4">{{ __('promo.early_access') }}</p>
     <a
-        href="https://wa.me/6282162599980"
+        href="{{ $siteSettings->whatsappUrl() }}"
         target="_blank" rel="noopener"
         class="inline-block bg-farm-600 text-white font-bold px-6 py-3 rounded-full hover:bg-farm-500 transition-colors duration-200 cursor-pointer"
     >

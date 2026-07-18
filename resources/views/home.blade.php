@@ -1,22 +1,25 @@
 @extends('layouts.app')
 
 @section('schema')
-@verbatim
-{
-  "@context": "https://schema.org",
-  "@type": "Restaurant",
-  "name": "Gundaling Farmstead",
-  "url": "https://gundalingfarmstead.com",
-  "address": { "@type": "PostalAddress",
-    "streetAddress": "Jl. Jamin Ginting, Desa Jaranguda",
-    "addressLocality": "Berastagi", "addressRegion": "Sumatera Utara",
-    "postalCode": "22158", "addressCountry": "ID" },
-  "geo": { "@type": "GeoCoordinates", "latitude": 3.211194, "longitude": 98.508194 },
-  "telephone": "+6282162599980",
-  "servesCuisine": ["Indonesian","Western","Karo","Farm to Table"],
-  "openingHours": "Mo-Su 10:00-20:00"
-}
-@endverbatim
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'Restaurant',
+    'name' => 'Gundaling Farmstead',
+    'url' => 'https://gundalingfarmstead.com',
+    'address' => [
+        '@type' => 'PostalAddress',
+        'streetAddress' => 'Jl. Jamin Ginting, Desa Jaranguda',
+        'addressLocality' => 'Berastagi',
+        'addressRegion' => 'Sumatera Utara',
+        'postalCode' => '22158',
+        'addressCountry' => 'ID',
+    ],
+    'geo' => ['@type' => 'GeoCoordinates', 'latitude' => 3.211194, 'longitude' => 98.508194],
+    'telephone' => '+' . $siteSettings->whatsapp_number,
+    'email' => $siteSettings->email,
+    'servesCuisine' => ['Indonesian', 'Western', 'Karo', 'Farm to Table'],
+    'openingHours' => 'Mo-Su 10:00-20:00',
+], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
 @endsection
 
 @section('content')
@@ -98,7 +101,7 @@
             <span class="text-amber font-sans font-bold tracking-wide">{{ __('home.scene1_label') }}</span>
             <h2 class="font-display text-3xl lg:text-4xl text-farm-900 mt-2 mb-4">{{ __('home.scene1_title') }}</h2>
             <p class="text-earth-700 text-lg mb-6">{{ __('home.scene1_body') }}</p>
-            <a href="https://gundalingfarm.com" target="_blank" rel="noopener" class="text-farm-600 font-bold hover:text-farm-500 cursor-pointer">
+            <a href="{{ $siteSettings->farm_url }}" target="_blank" rel="noopener" class="text-farm-600 font-bold hover:text-farm-500 cursor-pointer">
                 → {{ __('home.scene1_link') }}
             </a>
         </div>
@@ -114,7 +117,7 @@
             <p class="text-earth-700 text-lg mb-6">{{ __('home.scene2_body') }}</p>
             <div class="flex flex-wrap gap-2">
                 @foreach (__('home.dairy_pills') as $pill)
-                    <a href="https://gundalingfarm.com" target="_blank" rel="noopener" class="bg-white border border-farm-300 text-farm-700 px-4 py-2 rounded-full text-sm hover:bg-farm-100 cursor-pointer">
+                    <a href="{{ $siteSettings->farm_url }}" target="_blank" rel="noopener" class="bg-white border border-farm-300 text-farm-700 px-4 py-2 rounded-full text-sm hover:bg-farm-100 cursor-pointer">
                         {{ $pill }}
                     </a>
                 @endforeach
@@ -238,14 +241,14 @@
     <div class="absolute inset-0 bg-linear-to-t from-farm-950/90 via-farm-950/40 to-transparent"></div>
     <div class="scene-text relative max-w-2xl mx-auto text-center">
         <h2 class="font-display text-3xl lg:text-4xl text-white mb-6">{{ __('home.bridge_title') }}</h2>
-        <a href="https://gundalingfarm.com" target="_blank" rel="noopener" class="inline-block bg-gold text-farm-950 px-8 py-3 rounded-full font-bold hover:bg-amber transition-colors duration-200 cursor-pointer">
+        <a href="{{ $siteSettings->farm_url }}" target="_blank" rel="noopener" class="inline-block bg-gold text-farm-950 px-8 py-3 rounded-full font-bold hover:bg-amber transition-colors duration-200 cursor-pointer">
             {{ __('home.bridge_cta') }} →
         </a>
     </div>
 </section>
 
 <!-- <section class="py-16 px-6 lg:px-12 bg-earth-200 text-center">
-    <a href="https://gundalingfarm.com" target="_blank" rel="noopener" class="text-farm-700 font-display text-xl hover:text-farm-500 cursor-pointer">
+    <a href="{{ $siteSettings->farm_url }}" target="_blank" rel="noopener" class="text-farm-700 font-display text-xl hover:text-farm-500 cursor-pointer">
         {{ __('home.visit_sister') }} →
     </a>
 </section> -->

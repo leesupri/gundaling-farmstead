@@ -24,7 +24,7 @@
         <div class="space-y-6">
             <div>
                 <h3 class="font-display text-lg text-farm-900 mb-2">{{ $isId ? 'Alamat' : 'Address' }}</h3>
-                <p class="text-earth-700">Jl. Jamin Ginting, Desa Jaranguda, Simpang Pelawi, Kabupaten Karo, Berastagi 22158, North Sumatra, Indonesia</p>
+                <p class="text-earth-700">{{ $siteSettings->address }}</p>
             </div>
 
             <div>
@@ -34,20 +34,22 @@
 
             <div>
                 <h3 class="font-display text-lg text-farm-900 mb-2">{{ $isId ? 'Telepon' : 'Phone' }}</h3>
-                <a href="https://wa.me/6282162599980" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-5 py-2.5 rounded-full hover:opacity-90 transition-opacity duration-200 cursor-pointer">
+                <a href="{{ $siteSettings->whatsappUrl() }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-5 py-2.5 rounded-full hover:opacity-90 transition-opacity duration-200 cursor-pointer">
                     {{ __('common.chat_on_whatsapp') }}
                 </a>
             </div>
 
             <div>
                 <h3 class="font-display text-lg text-farm-900 mb-2">Email</h3>
-                <a href="mailto:info@gundalingfarmstead.com" class="text-farm-600 hover:text-farm-500 cursor-pointer">info@pimsgundaling.com</a>
+                <a href="mailto:{{ $siteSettings->email }}" class="text-farm-600 hover:text-farm-500 cursor-pointer">{{ $siteSettings->email }}</a>
             </div>
 
-            <div>
-                <h3 class="font-display text-lg text-farm-900 mb-2">Instagram</h3>
-                <a href="https://instagram.com/gundaling_farmstead" target="_blank" rel="noopener" class="text-farm-600 hover:text-farm-500 cursor-pointer">@gundaling_farmstead</a>
-            </div>
+            @if ($siteSettings->instagram_handle)
+                <div>
+                    <h3 class="font-display text-lg text-farm-900 mb-2">Instagram</h3>
+                    <a href="{{ $siteSettings->instagramUrl() }}" target="_blank" rel="noopener" class="text-farm-600 hover:text-farm-500 cursor-pointer">@{{ $siteSettings->instagram_handle }}</a>
+                </div>
+            @endif
 
             <iframe
                 src="https://www.openstreetmap.org/export/embed.html?bbox=98.503194,3.206194,98.513194,3.216194&layer=mapnik&marker=3.211194,98.508194"
@@ -116,7 +118,7 @@
 
     <div class="mt-16 text-center">
         <p class="text-earth-700 mb-3">{{ $isId ? 'Mencari produk farm atau wisata edukasi?' : 'Looking for farm products or field trips?' }}</p>
-        <a href="https://gundalingfarm.com" target="_blank" rel="noopener" class="text-farm-600 font-display text-lg hover:text-farm-500 cursor-pointer">
+        <a href="{{ $siteSettings->farm_url }}" target="_blank" rel="noopener" class="text-farm-600 font-display text-lg hover:text-farm-500 cursor-pointer">
             {{ $isId ? 'Kunjungi Gundaling Farm' : 'Visit Gundaling Farm' }} →
         </a>
     </div>

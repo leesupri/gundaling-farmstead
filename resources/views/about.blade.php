@@ -66,7 +66,7 @@
     <div class="absolute inset-0 bg-linear-to-t from-farm-950/90 via-farm-950/40 to-transparent"></div>
     <div class="scene-text relative max-w-2xl mx-auto text-center">
         <h2 class="font-display text-3xl lg:text-4xl text-white mb-6">{{ __('about.bridge_title') }}</h2>
-        <a href="https://gundalingfarm.com" target="_blank" rel="noopener" class="inline-block bg-gold text-farm-950 px-8 py-3 rounded-full font-bold hover:bg-amber transition-colors duration-200 cursor-pointer">
+        <a href="{{ $siteSettings->farm_url }}" target="_blank" rel="noopener" class="inline-block bg-gold text-farm-950 px-8 py-3 rounded-full font-bold hover:bg-amber transition-colors duration-200 cursor-pointer">
             {{ __('about.bridge_cta') }} →
         </a>
     </div>

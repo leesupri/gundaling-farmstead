@@ -12,7 +12,7 @@
     class="fixed bottom-8 right-8 z-50"
 >
     <a
-        href="https://wa.me/6282162599980?text={{ rawurlencode(__('common.wa_prefill_message')) }}"
+        href="{{ $siteSettings->whatsappUrl(__('common.wa_prefill_message')) }}"
         target="_blank"
         rel="noopener"
         aria-label="{{ __('common.chat_on_whatsapp') }}"

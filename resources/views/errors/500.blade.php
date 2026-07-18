@@ -11,6 +11,6 @@
     </p>
     <div class="actions">
         <a href="{{ route('home') }}" class="btn btn-primary">Back to Home</a>
-        <a href="https://wa.me/6282162599980" target="_blank" rel="noopener" class="btn btn-gold">Message us on WhatsApp</a>
+        <a href="{{ $siteSettings->whatsappUrl() }}" target="_blank" rel="noopener" class="btn btn-gold">Message us on WhatsApp</a>
     </div>
 @endsection
