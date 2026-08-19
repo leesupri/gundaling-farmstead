@@ -472,3 +472,23 @@ document.querySelectorAll('.btn-farmstead').forEach((btn) => {
         gsap.to(fill, { scaleX: 0, transformOrigin: toLeft ? 'left' : 'right', duration: 0.3, ease: 'power2.in' });
     });
 });
+
+// --- Directional hover underline for nav links (same pattern, active link stays lit) ---
+document.querySelectorAll('.nav-link:not(.is-active)').forEach((link) => {
+    const underline = link.querySelector('.nav-underline');
+    if (!underline) {
+        return;
+    }
+
+    link.addEventListener('mouseenter', (e) => {
+        const rect = link.getBoundingClientRect();
+        const fromLeft = (e.clientX - rect.left) < rect.width / 2;
+        gsap.fromTo(underline, { scaleX: 0, transformOrigin: fromLeft ? 'left' : 'right' }, { scaleX: 1, duration: 0.35, ease: 'power2.out' });
+    });
+
+    link.addEventListener('mouseleave', (e) => {
+        const rect = link.getBoundingClientRect();
+        const toLeft = (e.clientX - rect.left) < rect.width / 2;
+        gsap.to(underline, { scaleX: 0, transformOrigin: toLeft ? 'left' : 'right', duration: 0.3, ease: 'power2.in' });
+    });
+});

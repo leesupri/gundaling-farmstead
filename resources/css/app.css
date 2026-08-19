@@ -41,6 +41,17 @@
         display: none !important;
     }
 
+    /* Nav link underline — persistent on the active page, GSAP-driven directional
+       sweep on hover for inactive links (see app.js). */
+    .nav-underline {
+        transform: scaleX(0);
+        transform-origin: left;
+    }
+
+    .nav-link.is-active .nav-underline {
+        transform: scaleX(1);
+    }
+
     .walk-mascot {
         left: -80px;
     }
