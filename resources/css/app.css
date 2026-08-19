@@ -203,6 +203,26 @@
         }
     }
 
+    /* ─── MENU ITEM DESCRIPTION — expand-in-place ───
+       The paragraph's own line-clamp toggles instantly (not animatable),
+       but wrapping it in a max-height + overflow:hidden container that
+       transitions turns that instant content change into a smooth reveal. */
+    .menu-item-desc-wrap {
+        max-height: 2.75rem; /* ~2 lines at text-sm */
+        overflow: hidden;
+        transition: max-height 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .menu-item-desc-wrap.is-expanded {
+        max-height: 20rem; /* generous cap — real descriptions are short */
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .menu-item-desc-wrap {
+            transition: none;
+        }
+    }
+
     /* ─── MENU HERO — 3D COVERFLOW CAROUSEL ─── */
     .menu-hero {
         position: relative;

@@ -21,4 +21,6 @@ return [
     'view_offer' => 'Lihat Promo',
     'maybe_later' => 'Nanti saja',
     'wa_prefill_message' => 'Halo Gundaling Farmstead, saya ingin bertanya tentang...',
+    'show_more' => 'Selengkapnya',
+    'show_less' => 'Tutup',
 ];

@@ -282,7 +282,14 @@
 
             <div class="menu-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse ($cat->items as $item)
-                    <div class="menu-item-card relative bg-white/4 border border-white/8 rounded-xl overflow-hidden hover:border-gold/40 transition-colors duration-300">
+                    @php
+                        $description = $item->localDescription();
+                        $isLongDescription = $description && mb_strlen($description) > 80;
+                    @endphp
+                    <div
+                        x-data="{ expanded: false }"
+                        class="menu-item-card relative bg-white/4 border border-white/8 rounded-xl overflow-hidden hover:border-gold/40 transition-colors duration-300"
+                    >
                         <div class="relative aspect-video overflow-hidden">
                             @if ($item->image)
                                 <img src="{{ str_starts_with($item->image, '/') ? $item->image : '/storage/' . $item->image }}" alt="{{ $item->localName() }}" class="w-full h-full object-cover" loading="lazy">
@@ -308,8 +315,32 @@
                         </div>
 
                         <div class="p-4">
-                            <h3 class="font-display text-earth-200">{{ $item->localName() }}</h3>
-                            <p class="text-farm-200 text-sm mt-1 line-clamp-2">{{ $item->localDescription() }}</p>
+                            <h3 class="font-display text-earth-200 wrap-break-word">{{ $item->localName() }}</h3>
+
+                            @if ($description)
+                                <div class="menu-item-desc-wrap" :class="expanded ? 'is-expanded' : ''">
+                                    <p
+                                        class="text-farm-200 text-sm mt-1 wrap-break-word"
+                                        :class="expanded ? 'line-clamp-none' : 'line-clamp-2'"
+                                    >
+                                        {{ $description }}
+                                    </p>
+                                </div>
+
+                                @if ($isLongDescription)
+                                    <button
+                                        type="button"
+                                        @click="expanded = !expanded"
+                                        :aria-expanded="expanded.toString()"
+                                        class="inline-flex items-center gap-1 mt-1 text-xs font-bold text-gold hover:text-amber transition-colors duration-200 cursor-pointer"
+                                    >
+                                        <span x-text="expanded ? '{{ __('common.show_less') }}' : '{{ __('common.show_more') }}'"></span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 transition-transform duration-200" :class="expanded ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </button>
+                                @endif
+                            @endif
 
                             <div class="flex flex-wrap gap-3 mt-3">
                                 @forelse ($item->activePrices() as $label => $value)
