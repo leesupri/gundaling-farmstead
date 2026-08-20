@@ -47,7 +47,7 @@
             @if ($siteSettings->instagram_handle)
                 <div>
                     <h3 class="font-display text-lg text-farm-900 mb-2">Instagram</h3>
-                    <a href="{{ $siteSettings->instagramUrl() }}" target="_blank" rel="noopener" class="text-farm-600 hover:text-farm-500 cursor-pointer">@{{ $siteSettings->instagram_handle }}</a>
+                    <a href="{{ $siteSettings->instagramUrl() }}" target="_blank" rel="noopener" class="text-farm-600 hover:text-farm-500 cursor-pointer">{{ '@' . $siteSettings->instagram_handle }}</a>
                 </div>
             @endif
 
